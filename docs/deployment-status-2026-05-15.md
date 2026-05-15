@@ -17,7 +17,7 @@ https://affiliate-video-skill-pack.pages.dev
 Latest deployment preview observed:
 
 ```text
-https://ad987e57.affiliate-video-skill-pack.pages.dev
+https://a1cc53af.affiliate-video-skill-pack.pages.dev
 ```
 
 Verified routes:
@@ -72,6 +72,7 @@ Live smoke checks:
 
 - `GET https://affiliate-video.getgeofix.xyz/api/nowpayments/offers` returned the three USD-priced offers.
 - `POST https://affiliate-video.getgeofix.xyz/api/nowpayments/create-invoice` for `setup-review` returned a NOWPayments hosted invoice URL.
+- `POST https://affiliate-video.getgeofix.xyz/api/nowpayments/create-invoice` for the old `pro-pack` id returned `unknown_offer`.
 - `POST https://affiliate-video.getgeofix.xyz/api/nowpayments/ipn` with a signed smoke-test payload returned `{"ok":true}`.
 
 The API key and IPN secret are stored as Cloudflare Pages production secrets, not committed to the repo. The launch
