@@ -4,12 +4,18 @@
     <loc>https://affiliate-video-skill-pack.pages.dev/</loc>
   </url>
   <url>
-    <loc>https://affiliate-video-skill-pack.pages.dev/checkout.html</loc>
+    <loc>https://affiliate-video-skill-pack.pages.dev/checkout</loc>
   </url>
   <url>
-    <loc>https://affiliate-video-skill-pack.pages.dev/privacy.html</loc>
+    <loc>https://affiliate-video-skill-pack.pages.dev/privacy</loc>
   </url>
   <url>
-    <loc>https://affiliate-video-skill-pack.pages.dev/support.html</loc>
+    <loc>https://affiliate-video-skill-pack.pages.dev/terms</loc>
+  </url>
+  <url>
+    <loc>https://affiliate-video-skill-pack.pages.dev/refund</loc>
+  </url>
+  <url>
+    <loc>https://affiliate-video-skill-pack.pages.dev/support</loc>
   </url>
 </urlset>

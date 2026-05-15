@@ -3,5 +3,5 @@
   "setup_review_checkout_url": "REPLACE_WITH_PROVIDER_CHECKOUT_URL",
   "managed_launch_checkout_url": "REPLACE_WITH_PROVIDER_CHECKOUT_URL",
   "provider": "stripe_or_gumroad_or_lemonsqueezy_or_polar",
-  "notes": "Do not commit secrets. Use hosted checkout URLs only."
+  "notes": "Copy this file to checkout-config.json for deployment. Do not commit secrets. Use hosted checkout URLs only."
 }

@@ -26,6 +26,8 @@ class SiteAndPackTest(unittest.TestCase):
                     self.assertTrue((SITE / "index.html").exists())
                     continue
                 candidate = SITE / target.lstrip("/")
+                if not candidate.exists() and not candidate.suffix:
+                    candidate = candidate.with_suffix(".html")
                 self.assertTrue(candidate.exists(), f"{path.name} links missing local target {target}")
 
     def test_monetization_pack_builds_expected_zip(self):

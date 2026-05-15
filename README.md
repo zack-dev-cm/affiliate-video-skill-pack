@@ -110,6 +110,14 @@ python3 scripts/build_monetization_pack.py \
 
 The checkout page is intentionally a placeholder until a Stripe, Gumroad, Lemon Squeezy, Polar, or other provider URL is connected.
 
+For deployment and custom-domain setup, see `docs/deployment-checklist.md`.
+
+```bash
+python3 scripts/deploy_cloudflare_pages.py \
+  --project-name affiliate-video-skill-pack \
+  --custom-domain affiliate-video.getgeofix.xyz
+```
+
 ## ClawHub Publish
 
 Publish the skill folder, not the repo root:
@@ -118,9 +126,9 @@ Publish the skill folder, not the repo root:
 clawhub publish "$PWD/skill/affiliate-video-campaign-operator" \
   --slug affiliate-video-campaign-operator \
   --name "Affiliate Video Campaign Operator" \
-  --version 0.1.2 \
+  --version 0.1.3 \
   --tags "affiliate,video,openclaw,claude,higgsfield,pinterest,tiktok,youtube,compliance" \
-  --changelog "Add static landing page, checkout placeholder, and Pro Pack monetization bundle."
+  --changelog "Add checkout configuration, buyer terms, refund policy, redirects, and Cloudflare deployment helper."
 ```
 
 ## Safety

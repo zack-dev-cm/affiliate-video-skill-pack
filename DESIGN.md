@@ -47,6 +47,8 @@ components:
 
 The landing page should feel like an operator workbench, not a generic AI product. The visual signature is receipts, ledgers, check statuses, and channel handoffs.
 
+Open Design compatibility: keep the public page static, local-first, and Cloudflare Pages friendly. The implementation follows the Open Design idea of a repo-local design system plus shippable HTML/CSS artifacts, without requiring the full Open Design runtime.
+
 ## Layout
 
 - First viewport must show the product name, the concrete job, and a real-looking campaign receipt panel.

@@ -58,5 +58,5 @@
     "status": "checkout placeholder only",
     "boundary": "Do not connect live payment until delivery, refund/support terms, and at least one public demo campaign or explicit buyer request exist."
   },
-  "next_experiment": "Publish v0.1.2 with the static page and Pro Pack source, record one low-risk demo campaign, and measure whether users ask for checkout activation or the receipt extension."
+  "next_experiment": "Publish v0.1.3 with buyer terms, refund policy, configurable checkout links, and Cloudflare deployment; record one low-risk demo campaign and measure whether users ask for checkout activation or the receipt extension."
 }

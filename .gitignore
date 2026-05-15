@@ -18,3 +18,4 @@ assets/source-private/
 *.har
 .env
 .env.*
+.wrangler/
