@@ -67,4 +67,4 @@ Open Design compatibility: keep the public page static, local-first, and Cloudfl
 
 - Receipt panels use compact rows and pass/review/block status pills.
 - Pricing cards use 8px radius and no decorative bloat.
-- CTA buttons are explicit: `Download free skill`, `Buy Pro Pack`, `Book setup review`.
+- CTA buttons are explicit: `Download free skill`, `Download launch pack`, `Book setup review`.

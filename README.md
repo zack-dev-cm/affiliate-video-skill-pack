@@ -101,16 +101,16 @@ The static landing page lives in `site/` and is ready for Cloudflare Pages or an
 python3 -m http.server 8787 --directory site
 ```
 
-The paid template bundle lives in `monetization/affiliate-video-pro-pack`.
+The free launch template bundle lives in `monetization/affiliate-video-pro-pack`.
 
 ```bash
 python3 scripts/build_monetization_pack.py \
   --out dist/affiliate-video-pro-pack.zip
 ```
 
-The checkout page creates server-side NOWPayments hosted invoices through Cloudflare Pages Functions. Prices are
-denominated in USD with `price_currency=usd`; the hosted invoice lets buyers choose supported crypto or fiat rails
-available for the NOWPayments account.
+The checkout page creates server-side NOWPayments hosted invoices for paid setup services through Cloudflare Pages
+Functions. Prices are denominated in USD with `price_currency=usd`; the hosted invoice lets buyers choose supported
+crypto or fiat rails available for the NOWPayments account.
 
 For deployment and custom-domain setup, see `docs/deployment-checklist.md`.
 
@@ -128,9 +128,9 @@ Publish the skill folder, not the repo root:
 clawhub publish "$PWD/skill/affiliate-video-campaign-operator" \
   --slug affiliate-video-campaign-operator \
   --name "Affiliate Video Campaign Operator" \
-  --version 0.1.4 \
+  --version 0.1.5 \
   --tags "affiliate,video,openclaw,claude,higgsfield,pinterest,tiktok,youtube,compliance" \
-  --changelog "Add NOWPayments USD invoice checkout, fiat checkout notes, and verified IPN endpoint."
+  --changelog "Make the launch pack free, keep NOWPayments for setup services, and add a public example page."
 ```
 
 ## Safety

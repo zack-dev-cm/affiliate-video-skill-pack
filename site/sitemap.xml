@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://affiliate-video-skill-pack.pages.dev/</loc>
+    <loc>https://affiliate-video.getgeofix.xyz/</loc>
   </url>
   <url>
-    <loc>https://affiliate-video-skill-pack.pages.dev/checkout</loc>
+    <loc>https://affiliate-video.getgeofix.xyz/checkout</loc>
   </url>
   <url>
-    <loc>https://affiliate-video-skill-pack.pages.dev/success</loc>
+    <loc>https://affiliate-video.getgeofix.xyz/examples</loc>
   </url>
   <url>
-    <loc>https://affiliate-video-skill-pack.pages.dev/cancel</loc>
+    <loc>https://affiliate-video.getgeofix.xyz/success</loc>
   </url>
   <url>
-    <loc>https://affiliate-video-skill-pack.pages.dev/privacy</loc>
+    <loc>https://affiliate-video.getgeofix.xyz/cancel</loc>
   </url>
   <url>
-    <loc>https://affiliate-video-skill-pack.pages.dev/terms</loc>
+    <loc>https://affiliate-video.getgeofix.xyz/privacy</loc>
   </url>
   <url>
-    <loc>https://affiliate-video-skill-pack.pages.dev/refund</loc>
+    <loc>https://affiliate-video.getgeofix.xyz/terms</loc>
   </url>
   <url>
-    <loc>https://affiliate-video-skill-pack.pages.dev/support</loc>
+    <loc>https://affiliate-video.getgeofix.xyz/refund</loc>
+  </url>
+  <url>
+    <loc>https://affiliate-video.getgeofix.xyz/support</loc>
   </url>
 </urlset>

@@ -1,10 +1,10 @@
 {
-  "name": "Affiliate Video Pro Pack",
+  "name": "Affiliate Video Launch Pack",
   "version": "0.1.0",
-  "price_usd": 49,
-  "status": "nowpayments-invoice",
-  "checkout_url": "https://affiliate-video.getgeofix.xyz/checkout.html",
-  "payment_provider": "NOWPayments",
+  "price_usd": 0,
+  "status": "free-public-pack",
+  "checkout_url": "https://github.com/zack-dev-cm/affiliate-video-skill-pack/releases/latest/download/affiliate-video-pro-pack.zip",
+  "payment_provider": "none",
   "fiat_price_currency": "USD",
   "delivery": {
     "format": "zip",
@@ -12,7 +12,7 @@
     "license": "single-operator commercial use"
   },
   "positioning": {
-    "one_liner": "Editable templates for AI affiliate-video campaigns with claim evidence, disclosures, and publishing receipts.",
+    "one_liner": "Free editable templates for AI affiliate-video campaigns with claim evidence, disclosures, and publishing receipts.",
     "not_promised": [
       "revenue",
       "virality",
@@ -35,7 +35,7 @@
     "experiment-tracker.csv",
     "creator-desk-gear-example.json"
   ],
-  "upsells": [
+  "paid_services": [
     {
       "name": "Setup Review",
       "price_usd": 299,

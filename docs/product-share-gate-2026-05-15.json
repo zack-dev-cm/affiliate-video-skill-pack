@@ -2,7 +2,7 @@
   "product": "affiliate-video-campaign-operator",
   "reviewed_at": "2026-05-15",
   "verdict": "Ship Free",
-  "reason": "The skill has a concrete first user path through AI affiliate creators who already use Claude/Higgsfield/OpenClaw workflows, but monetization should wait until real campaign receipts and usage are visible.",
+  "reason": "The skill and launch pack are public lead magnets; monetization is limited to setup services until real campaign receipts and usage are visible.",
   "gate_scores": {
     "first_traffic_source": 2,
     "trust_reason": 2,
@@ -43,7 +43,7 @@
       "shutdown_threshold": "fewer than 3 installs and no campaign examples"
     },
     "day_60": {
-      "target": "20 installs or 3 users asking for paid templates/setup",
+      "target": "20 installs or 3 users asking for paid setup",
       "shutdown_threshold": "no repeat use and no request for receipt extension"
     }
   },
@@ -53,10 +53,10 @@
     "Without a Chrome receipt extension, updating campaign ledgers still takes discipline."
   ],
   "paid_offer_added": {
-    "name": "Affiliate Video Pro Pack",
-    "price_usd": 49,
-    "status": "checkout placeholder only",
-    "boundary": "Do not connect live payment until delivery, refund/support terms, and at least one public demo campaign or explicit buyer request exist."
+    "name": "Affiliate Video Launch Pack",
+    "price_usd": 0,
+    "status": "free public release asset",
+    "boundary": "Do not charge for the public zip. Charge only for setup review or managed launch until automated private delivery exists."
   },
-  "next_experiment": "Publish v0.1.3 with buyer terms, refund policy, configurable checkout links, and Cloudflare deployment; record one low-risk demo campaign and measure whether users ask for checkout activation or the receipt extension."
+  "next_experiment": "Publish v0.1.5 with the public example page, free launch pack download, and NOWPayments setup-service invoices; measure whether users ask for setup review or the receipt extension."
 }

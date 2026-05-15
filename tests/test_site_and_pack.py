@@ -45,9 +45,9 @@ class SiteAndPackTest(unittest.TestCase):
                 self.assertIn("affiliate-video-pro-pack/offer.json", names)
                 self.assertIn("affiliate-video-pro-pack/templates/campaign-intake.md", names)
                 offer = json.loads(archive.read("affiliate-video-pro-pack/offer.json"))
-            self.assertEqual(offer["price_usd"], 49)
-            self.assertEqual(offer["status"], "nowpayments-invoice")
-            self.assertEqual(offer["payment_provider"], "NOWPayments")
+            self.assertEqual(offer["price_usd"], 0)
+            self.assertEqual(offer["status"], "free-public-pack")
+            self.assertEqual(offer["payment_provider"], "none")
             self.assertIn("revenue", offer["positioning"]["not_promised"])
 
     def test_nowpayments_checkout_is_server_side_and_fiat_priced(self):
@@ -64,14 +64,17 @@ class SiteAndPackTest(unittest.TestCase):
         self.assertIn('price_currency: "usd"', create_invoice)
         self.assertNotIn("pay_currency", create_invoice)
         self.assertIn("invoice_url", create_invoice)
+        self.assertNotIn('"pro-pack"', create_invoice)
+        self.assertIn("setup-review", create_invoice)
 
         self.assertIn("env.NOWPAYMENTS_IPN_SECRET", ipn)
         self.assertIn("x-nowpayments-sig", ipn)
         self.assertIn('hash: "SHA-512"', ipn)
         self.assertIn("sortObject", ipn)
 
-        self.assertIn('checkout_type: "hosted_invoice"', offers)
+        self.assertIn('checkout_type: "hosted_invoice_for_paid_services"', offers)
         self.assertIn('fiat_price_currency: "usd"', offers)
+        self.assertIn("publicOffers", offers)
 
 
 if __name__ == "__main__":

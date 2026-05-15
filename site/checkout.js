@@ -1,7 +1,5 @@
 (async function () {
   const fallbackLinks = {
-    pro_pack_checkout_url:
-      "https://github.com/zack-dev-cm/affiliate-video-skill-pack/issues/new?title=Pro%20Pack%20checkout%20setup",
     setup_review_checkout_url:
       "https://github.com/zack-dev-cm/affiliate-video-skill-pack/issues/new?title=Setup%20review%20request",
     managed_launch_checkout_url:
@@ -9,7 +7,6 @@
   };
 
   const buttonOffers = {
-    "pro-pack-checkout": "pro-pack",
     "setup-review-checkout": "setup-review",
     "managed-launch-checkout": "managed-launch",
   };
@@ -78,7 +75,7 @@
     setStatus(
       configured
         ? "Checkout uses configured hosted links from checkout-config.json."
-        : "NOWPayments invoice checkout is enabled. Prices are set in USD; buyers choose supported crypto or fiat rails on the hosted invoice.",
+        : "NOWPayments invoice checkout is enabled for setup services. Prices are set in USD; buyers choose supported crypto or fiat rails on the hosted invoice.",
       "success",
     );
   }
@@ -94,7 +91,6 @@
   }
 
   const configured = [
-    setCheckout("pro-pack-checkout", config.pro_pack_checkout_url, fallbackLinks.pro_pack_checkout_url),
     setCheckout("setup-review-checkout", config.setup_review_checkout_url, fallbackLinks.setup_review_checkout_url),
     setCheckout("managed-launch-checkout", config.managed_launch_checkout_url, fallbackLinks.managed_launch_checkout_url),
   ].some(Boolean);

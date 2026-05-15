@@ -39,6 +39,7 @@ Expected routes after deployment:
 - `/api/nowpayments/create-invoice`
 - `/api/nowpayments/ipn`
 - `/checkout.html`
+- `/examples.html`
 - `/success.html`
 - `/cancel.html`
 
@@ -52,7 +53,6 @@ The checkout page still supports an optional `site/checkout-config.json` overrid
 
 ```json
 {
-  "pro_pack_checkout_url": "https://provider.example/checkout/pro-pack",
   "setup_review_checkout_url": "https://provider.example/checkout/setup-review",
   "managed_launch_checkout_url": "https://provider.example/checkout/managed-launch",
   "provider": "stripe_or_gumroad_or_lemonsqueezy_or_polar"
@@ -95,4 +95,4 @@ python3 scripts/build_monetization_pack.py --out dist/affiliate-video-pro-pack.z
 Upload both release assets:
 
 - `dist/affiliate-video-campaign-operator-claude.zip`
-- `dist/affiliate-video-pro-pack.zip`
+- `dist/affiliate-video-pro-pack.zip` (free launch pack)

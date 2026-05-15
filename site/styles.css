@@ -69,6 +69,7 @@ a {
 
 nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 18px;
   color: var(--muted);
   font-size: 14px;

@@ -1,5 +1,4 @@
 {
-  "pro_pack_checkout_url": "REPLACE_WITH_PROVIDER_CHECKOUT_URL",
   "setup_review_checkout_url": "REPLACE_WITH_PROVIDER_CHECKOUT_URL",
   "managed_launch_checkout_url": "REPLACE_WITH_PROVIDER_CHECKOUT_URL",
   "provider": "optional_hosted_checkout_override",

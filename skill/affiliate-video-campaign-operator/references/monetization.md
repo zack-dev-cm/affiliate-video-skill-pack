@@ -7,8 +7,8 @@
    - Gives campaign ledger, compliance checker, and OpenClaw handoff.
    - Goal: trust, stars, installs, examples, inbound demand.
 
-2. Paid template pack
-   - $29 to $79.
+2. Free launch template pack
+   - Public release asset.
    - Niche scorecards, compliant hook banks, carousel structures, caption/disclosure variants, and landing-page templates.
    - Avoid selling copied prompts from third-party PDFs or videos.
 
@@ -58,23 +58,23 @@ Trust proof:
 - sample campaign ledger
 - screenshot receipt workflow
 
-Buy button offer:
+CTA offers:
 
-- `Pro Template Pack`
+- `Free Launch Pack`
 - `Setup Review`
 - `Managed Launch`
 
-Use Stripe, Lemon Squeezy, Gumroad, or Polar depending on the current project stack. Keep the free skill usable without payment.
+Use NOWPayments hosted invoices for setup services in the current deployment. Keep the free skill and launch pack usable without payment.
 
 Repo implementation:
 
 - Static page: `site/index.html`
-- Checkout placeholder: `site/checkout.html`
+- Setup-service checkout: `site/checkout.html`
 - Privacy/support pages: `site/privacy.html`, `site/support.html`
-- Pro Pack source: `monetization/affiliate-video-pro-pack`
-- Pro Pack build command: `python3 scripts/build_monetization_pack.py --out dist/affiliate-video-pro-pack.zip`
+- Launch Pack source: `monetization/affiliate-video-pro-pack`
+- Launch Pack build command: `python3 scripts/build_monetization_pack.py --out dist/affiliate-video-pro-pack.zip`
 
-Do not connect a live checkout until the operator has:
+Do not charge for a private digital pack until the operator has:
 
 - refund/support terms,
 - a working delivery path for the zip,
@@ -86,7 +86,7 @@ Do not connect a live checkout until the operator has:
 
 Do not build a heavy SaaS until one of these happens:
 
-- 10 users ask for paid templates or setup.
+- 10 users ask for paid setup or private template delivery.
 - 3 creators submit real campaigns for review.
 - The extension has 100 weekly active users.
 - A landing page converts above 2 percent from targeted traffic.

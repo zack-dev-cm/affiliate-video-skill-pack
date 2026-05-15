@@ -24,6 +24,7 @@ Verified routes:
 
 - `/`
 - `/checkout`
+- `/examples`
 - `/success`
 - `/cancel`
 - `/api/nowpayments/offers`
@@ -70,7 +71,8 @@ Direct payment is connected through Cloudflare Pages Functions and NOWPayments h
 Live smoke checks:
 
 - `GET https://affiliate-video.getgeofix.xyz/api/nowpayments/offers` returned the three USD-priced offers.
-- `POST https://affiliate-video.getgeofix.xyz/api/nowpayments/create-invoice` for `pro-pack` returned a NOWPayments hosted invoice URL.
+- `POST https://affiliate-video.getgeofix.xyz/api/nowpayments/create-invoice` for `setup-review` returned a NOWPayments hosted invoice URL.
 - `POST https://affiliate-video.getgeofix.xyz/api/nowpayments/ipn` with a signed smoke-test payload returned `{"ok":true}`.
 
-The API key and IPN secret are stored as Cloudflare Pages production secrets, not committed to the repo.
+The API key and IPN secret are stored as Cloudflare Pages production secrets, not committed to the repo. The launch
+pack is a free public release asset; paid checkout is reserved for setup services.

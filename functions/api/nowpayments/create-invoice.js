@@ -1,25 +1,6 @@
-const NOWPAYMENTS_INVOICE_URL = "https://api.nowpayments.io/v1/invoice";
+import { paidOfferFor } from "../../_shared/monetization-offers.js";
 
-const OFFERS = {
-  "pro-pack": {
-    name: "Affiliate Video Pro Pack",
-    priceUsd: 49,
-    description:
-      "Editable templates for affiliate campaign intake, disclosures, claims, captions, and 30-day experiments.",
-  },
-  "setup-review": {
-    name: "Affiliate Video Setup Review",
-    priceUsd: 299,
-    description:
-      "One sanitized campaign ledger reviewed for disclosure, claims, asset provenance, and publish handoff readiness.",
-  },
-  "managed-launch": {
-    name: "Affiliate Video Managed Launch",
-    priceUsd: 999,
-    description:
-      "One scoped affiliate campaign setup with creative planning, QC report, and OpenClaw handoff.",
-  },
-};
+const NOWPAYMENTS_INVOICE_URL = "https://api.nowpayments.io/v1/invoice";
 
 const JSON_HEADERS = {
   "Content-Type": "application/json; charset=utf-8",
@@ -65,16 +46,6 @@ export async function onRequestOptions() {
 }
 
 export async function onRequestPost({ request, env }) {
-  if (!env.NOWPAYMENTS_API_KEY) {
-    return json(
-      {
-        error: "payment_not_configured",
-        message: "NOWPayments API key is not configured for this Pages deployment.",
-      },
-      503,
-    );
-  }
-
   let payload = {};
   try {
     payload = await request.json();
@@ -83,14 +54,24 @@ export async function onRequestPost({ request, env }) {
   }
 
   const offerId = typeof payload.offer === "string" ? payload.offer.trim().toLowerCase() : "";
-  const offer = OFFERS[offerId];
+  const offer = paidOfferFor(offerId);
   if (!offer) {
     return json(
       {
         error: "unknown_offer",
-        message: "Choose pro-pack, setup-review, or managed-launch.",
+        message: "Choose setup-review or managed-launch. The template pack is a free public download.",
       },
       400,
+    );
+  }
+
+  if (!env.NOWPAYMENTS_API_KEY) {
+    return json(
+      {
+        error: "payment_not_configured",
+        message: "NOWPayments API key is not configured for this Pages deployment.",
+      },
+      503,
     );
   }
 

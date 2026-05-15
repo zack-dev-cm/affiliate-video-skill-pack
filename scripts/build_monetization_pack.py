@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and package the Affiliate Video Pro Pack."""
+"""Validate and package the Affiliate Video Launch Pack."""
 
 from __future__ import annotations
 
@@ -30,8 +30,10 @@ def validate_pack() -> dict[str, object]:
 
     offer = json.loads((PACK_DIR / "offer.json").read_text(encoding="utf-8"))
     example = json.loads((PACK_DIR / "examples" / "creator-desk-gear-example.json").read_text(encoding="utf-8"))
-    if offer.get("price_usd") != 49:
-        raise SystemExit("offer.json price_usd must be 49 for this package")
+    if offer.get("price_usd") != 0:
+        raise SystemExit("offer.json price_usd must be 0 because this package is a public launch asset")
+    if offer.get("status") != "free-public-pack":
+        raise SystemExit("offer.json status must be free-public-pack")
     if "revenue" not in offer.get("positioning", {}).get("not_promised", []):
         raise SystemExit("offer.json must explicitly avoid revenue promises")
     if example.get("offer", {}).get("product_category") != "home office accessory":
