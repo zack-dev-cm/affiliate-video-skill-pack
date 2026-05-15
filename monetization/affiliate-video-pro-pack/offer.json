@@ -2,8 +2,10 @@
   "name": "Affiliate Video Pro Pack",
   "version": "0.1.0",
   "price_usd": 49,
-  "status": "checkout-placeholder",
-  "checkout_url": "REPLACE_WITH_STRIPE_GUMROAD_LEMONSQUEEZY_OR_POLAR_URL",
+  "status": "nowpayments-invoice",
+  "checkout_url": "https://affiliate-video.getgeofix.xyz/checkout.html",
+  "payment_provider": "NOWPayments",
+  "fiat_price_currency": "USD",
   "delivery": {
     "format": "zip",
     "folder": "monetization/affiliate-video-pro-pack",

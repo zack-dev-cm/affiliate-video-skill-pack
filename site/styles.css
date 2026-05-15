@@ -167,6 +167,11 @@ h3 {
   color: var(--ink);
 }
 
+.button[aria-busy="true"] {
+  cursor: wait;
+  opacity: 0.74;
+}
+
 .button.full {
   width: 100%;
 }
@@ -351,6 +356,18 @@ pre {
   background: #fffdf8;
   color: var(--muted);
   font-size: 14px;
+}
+
+.notice[data-tone="success"] {
+  border-color: rgba(31, 93, 80, 0.32);
+  background: #f4fbf7;
+  color: var(--forest);
+}
+
+.notice[data-tone="error"] {
+  border-color: rgba(162, 61, 53, 0.32);
+  background: #fff6f4;
+  color: var(--red);
 }
 
 .text-block {

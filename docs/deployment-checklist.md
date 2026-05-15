@@ -18,9 +18,37 @@ python3 scripts/deploy_cloudflare_pages.py \
 
 The script uses `npx -y wrangler` and `CLOUDFLARE_API_TOKEN`. If more than one Cloudflare account is available, set `CLOUDFLARE_ACCOUNT_ID`.
 
-## Direct Checkout
+## NOWPayments Checkout
 
-Direct checkout is enabled by creating `site/checkout-config.json` during deployment:
+Checkout is enabled through Cloudflare Pages Functions and NOWPayments hosted invoices:
+
+```bash
+npx -y wrangler pages secret put NOWPAYMENTS_API_KEY \
+  --project-name affiliate-video-skill-pack
+
+npx -y wrangler pages secret put NOWPAYMENTS_IPN_SECRET \
+  --project-name affiliate-video-skill-pack
+```
+
+Do not commit API keys or IPN secrets. The invoice function sends `price_currency=usd` and omits
+`pay_currency`, so the buyer chooses from the payment rails available in the NOWPayments hosted invoice.
+
+Expected routes after deployment:
+
+- `/api/nowpayments/offers`
+- `/api/nowpayments/create-invoice`
+- `/api/nowpayments/ipn`
+- `/checkout.html`
+- `/success.html`
+- `/cancel.html`
+
+Fiat card or bank options are controlled by NOWPayments account settings, buyer location, provider support,
+invoice amount, and KYB/KYC requirements. If fiat is not visible inside the hosted invoice, finish the
+NOWPayments fiat-on-ramp provider activation in the dashboard.
+
+## Hosted URL Override
+
+The checkout page still supports an optional `site/checkout-config.json` override during deployment:
 
 ```json
 {
@@ -31,7 +59,8 @@ Direct checkout is enabled by creating `site/checkout-config.json` during deploy
 }
 ```
 
-Do not commit secrets. Use hosted checkout URLs only.
+Do not commit secrets. Use hosted checkout URLs only. When an override URL is present, it takes priority over
+the local NOWPayments invoice function for that offer.
 
 ## Domain
 

@@ -17,13 +17,18 @@ https://affiliate-video-skill-pack.pages.dev
 Latest deployment preview observed:
 
 ```text
-https://bd0c041d.affiliate-video-skill-pack.pages.dev
+https://ad987e57.affiliate-video-skill-pack.pages.dev
 ```
 
 Verified routes:
 
 - `/`
 - `/checkout`
+- `/success`
+- `/cancel`
+- `/api/nowpayments/offers`
+- `/api/nowpayments/create-invoice`
+- `/api/nowpayments/ipn`
 - `/terms`
 - `/refund`
 - `/styles.css`
@@ -47,7 +52,7 @@ created/already exists, status pending or initializing
 DNS status during verification:
 
 ```text
-affiliate-video.getgeofix.xyz did not resolve yet
+affiliate-video.getgeofix.xyz CNAME affiliate-video-skill-pack.pages.dev
 ```
 
 Required DNS record if the zone is managed outside the active Cloudflare account:
@@ -60,4 +65,12 @@ Value: affiliate-video-skill-pack.pages.dev
 
 ## Checkout
 
-Direct payment is not connected. The page is in request mode until `site/checkout-config.json` is added during deployment with hosted checkout URLs.
+Direct payment is connected through Cloudflare Pages Functions and NOWPayments hosted invoices.
+
+Live smoke checks:
+
+- `GET https://affiliate-video.getgeofix.xyz/api/nowpayments/offers` returned the three USD-priced offers.
+- `POST https://affiliate-video.getgeofix.xyz/api/nowpayments/create-invoice` for `pro-pack` returned a NOWPayments hosted invoice URL.
+- `POST https://affiliate-video.getgeofix.xyz/api/nowpayments/ipn` with a signed smoke-test payload returned `{"ok":true}`.
+
+The API key and IPN secret are stored as Cloudflare Pages production secrets, not committed to the repo.

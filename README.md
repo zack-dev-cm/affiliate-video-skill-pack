@@ -108,7 +108,9 @@ python3 scripts/build_monetization_pack.py \
   --out dist/affiliate-video-pro-pack.zip
 ```
 
-The checkout page is intentionally a placeholder until a Stripe, Gumroad, Lemon Squeezy, Polar, or other provider URL is connected.
+The checkout page creates server-side NOWPayments hosted invoices through Cloudflare Pages Functions. Prices are
+denominated in USD with `price_currency=usd`; the hosted invoice lets buyers choose supported crypto or fiat rails
+available for the NOWPayments account.
 
 For deployment and custom-domain setup, see `docs/deployment-checklist.md`.
 
@@ -126,9 +128,9 @@ Publish the skill folder, not the repo root:
 clawhub publish "$PWD/skill/affiliate-video-campaign-operator" \
   --slug affiliate-video-campaign-operator \
   --name "Affiliate Video Campaign Operator" \
-  --version 0.1.3 \
+  --version 0.1.4 \
   --tags "affiliate,video,openclaw,claude,higgsfield,pinterest,tiktok,youtube,compliance" \
-  --changelog "Add checkout configuration, buyer terms, refund policy, redirects, and Cloudflare deployment helper."
+  --changelog "Add NOWPayments USD invoice checkout, fiat checkout notes, and verified IPN endpoint."
 ```
 
 ## Safety

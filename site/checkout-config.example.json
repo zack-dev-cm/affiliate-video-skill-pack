@@ -2,6 +2,6 @@
   "pro_pack_checkout_url": "REPLACE_WITH_PROVIDER_CHECKOUT_URL",
   "setup_review_checkout_url": "REPLACE_WITH_PROVIDER_CHECKOUT_URL",
   "managed_launch_checkout_url": "REPLACE_WITH_PROVIDER_CHECKOUT_URL",
-  "provider": "stripe_or_gumroad_or_lemonsqueezy_or_polar",
-  "notes": "Copy this file to checkout-config.json for deployment. Do not commit secrets. Use hosted checkout URLs only."
+  "provider": "optional_hosted_checkout_override",
+  "notes": "Optional override. Leave absent to use the server-side NOWPayments invoice function. Do not commit secrets."
 }
