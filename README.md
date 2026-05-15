@@ -1,9 +1,11 @@
 # Affiliate Video Skill Pack
 
-Original skill for compliant AI affiliate-video campaigns across Claude, Codex, OpenClaw, Grok, and generic agent runtimes.
+Original skill for compliant AI affiliate-video campaign review across Claude,
+Codex, OpenClaw, Grok, and generic agent runtimes.
 
 It adapts the useful pattern from Claude + Higgsfield affiliate workflows into a safer production system:
-research the offer, prove the claims, generate videos/carousels, keep provenance, disclose commercial relationships, and hand off publishing to supervised browser automation.
+research the offer, prove the claims, plan videos/carousels, keep provenance,
+disclose commercial relationships, and prepare a human publishing checklist.
 
 ## Skill
 
@@ -11,11 +13,14 @@ research the offer, prove the claims, generate videos/carousels, keep provenance
 
 ## What It Does
 
-- Turns a product or niche into a campaign ledger with offer, disclosure, claims, creative assets, posts, and analytics.
+- Reviews a product or niche campaign plan with offer, disclosure, claims,
+  creative notes, posts, and analytics fields.
 - Validates affiliate disclosures, Amazon Associate language, TikTok health/supplement risks, fake-testimonial language, product claims, and missing asset rights notes.
 - Produces Claude/Higgsfield creative prompts as operator guidance without copying third-party prompt packs.
-- Exports OpenClaw handoff bundles for supervised Pinterest, TikTok, YouTube Shorts, and Instagram Reels publishing.
-- Optionally combines with `agentic-video-production-publisher` for character/music/shot ledgers and with `openclaw-youtube-tiktok-publisher` for logged-in publishing. If those skills are not installed, use this skill's generated handoff JSON and checklist manually.
+- Keeps final Pinterest, TikTok, YouTube Shorts, and Instagram Reels publishing
+  as a human decision after review.
+- The repo still includes `export_openclaw_handoff.py` for legacy local
+  experiments, but that helper is excluded from the ClawHub package.
 
 ## Quick Start
 
@@ -123,7 +128,8 @@ Common operator flow:
 1. Create or edit `runs/campaign.json`.
 2. Run `check_affiliate_campaign.py` before generation and publishing.
 3. Render `reports/campaign-plan.md` for human review.
-4. Export an OpenClaw handoff only after disclosures, claims, rights notes, and asset paths are filled.
+4. Prepare a human publishing checklist only after disclosures, claims, rights
+   notes, and asset paths are filled.
 
 ### Claude
 
@@ -155,26 +161,25 @@ cp -R skill/affiliate-video-campaign-operator "${CODEX_HOME:-$HOME/.codex}/skill
 In Codex, ask:
 
 ```text
-Use the affiliate-video-campaign-operator skill to create and validate a campaign ledger, then export an OpenClaw handoff for Pinterest.
+Use the affiliate-video-campaign-operator skill to review a campaign ledger and
+prepare a human publishing checklist for Pinterest.
 ```
 
 Codex should run the bundled Python scripts instead of rewriting the workflow by hand.
 
 ### OpenClaw
 
-OpenClaw should not be the strategy brain for this skill. Use it only after the QC report passes and an export exists:
+OpenClaw-specific experiments should stay outside the ClawHub package. The
+legacy local helper remains in this repo for maintainers who need to inspect old
+run formats:
 
 ```bash
-python3 skill/affiliate-video-campaign-operator/scripts/export_openclaw_handoff.py \
-  --campaign runs/campaign.json \
-  --platform youtube \
-  --out runs/youtube-openclaw-handoff.json \
-  --browser-profile youtube-profile
+python3 skill/affiliate-video-campaign-operator/scripts/export_openclaw_handoff.py --help
 ```
 
-Then give OpenClaw the handoff JSON and the logged-in browser profile. Pause on CAPTCHA, 2FA, policy warnings, billing, copyright disputes, or final publish confirmation unless pre-approved.
-
-Supported post and handoff platforms are `pinterest`, `tiktok`, `youtube`, and `instagram`. Other platforms can be tracked manually in `campaign.target_platforms`, but these scripts cannot export OpenClaw handoffs for them.
+Supported review platforms are `pinterest`, `tiktok`, `youtube`, and
+`instagram`. Other platforms can be tracked manually in
+`campaign.target_platforms`.
 
 ### Grok And Other Chat Agents
 

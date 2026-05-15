@@ -1,185 +1,71 @@
 ---
 name: affiliate-video-campaign-operator
-description: Build compliant AI affiliate-video campaigns from niche research to Claude/Higgsfield creative packs and supervised OpenClaw publishing handoffs. Use when users ask for affiliate UGC videos, Pinterest carousels, product research, Claude MCP/Higgsfield workflows, affiliate disclosure checks, monetization, or cross-posting to TikTok, Instagram, YouTube Shorts, or Pinterest.
-license: MIT-0
-metadata: {"openclaw":{"skillKey":"affiliate-video-campaign-operator","requires":{"anyBins":["python3","python"]},"relatedSkills":["agentic-video-production-publisher","openclaw-youtube-tiktok-publisher","chrome-extension-cws-shipper"]}}
+description: Review affiliate video campaign plans, disclosures, claims, creative notes, and platform captions before a human decides what to create or publish.
 ---
 
-# Affiliate Video Campaign Operator
+# Affiliate Video Campaign Reviewer
 
-## Goal
+Use this skill to review an affiliate video or carousel campaign plan in a
+generic chat-agent workflow before a human creates assets, spends money, or
+publishes anything. Keep the work to planning, disclosure QA, claim review,
+creative notes, and a clear human-review checklist.
 
-Run an AI-assisted affiliate campaign without losing disclosure, claim evidence, platform compliance, creative provenance, or publish evidence.
+## Inputs
 
-This skill is an original workflow for Claude, Codex, OpenClaw, Grok, and generic chat-agent runtimes. It may be inspired by public affiliate-video patterns, but it must not copy paid prompt packs, private playbooks, or third-party templates into public artifacts.
+Ask only for missing review-critical details:
 
-## Non-Negotiables
+- product name, merchant, product category, and product URL,
+- affiliate program or disclosure requirement,
+- target market and target platform,
+- whether the creator personally used the product,
+- draft hook, caption, CTA, hashtags, and link placement,
+- claim evidence for any factual, comparative, health, finance, safety, or
+  income statement,
+- creative notes, asset rights notes, and intended product references.
 
-- Treat affiliate links, promo codes, gifted products, and paid placements as commercial content. Add clear disclosure close to the endorsement and in video/carousel creative when applicable.
-- Do not create fake personal testimonials. If the operator has not used the product, avoid first-person result claims such as "I tried this" or "it fixed my sleep."
-- Do not make medical, health, financial, legal, safety, or income claims without evidence that is recorded in the campaign ledger.
-- For supplements, skincare, sleep aids, finance, weight loss, or other sensitive products, use conservative educational language and platform-specific gates before generating or publishing.
-- Do not set paid-generation MCP tools to unrestricted background spending. Batch drafts can be automated; spend, health claims, and irreversible publishing need explicit operator review.
-- Keep provenance for every asset: source image or link, generation provider/model, prompt file or prompt summary, rights note, selected export path, and rejected-take notes when useful.
-- Use OpenClaw only for logged-in browser operations. Pause for CAPTCHA, 2FA, account recovery, billing, copyright disputes, or final publish confirmation when not pre-approved.
+Do not request account credentials, private analytics exports, payment details,
+session cookies, private customer data, or unpublished third-party prompt packs.
 
-## Quick Start
+## Review Workflow
 
-1. Create a campaign ledger.
+1. Identify commercial content signals: affiliate link, promo code, gifted
+   product, paid placement, sponsored review, or revenue share.
+2. Check disclosure placement. The disclosure must be close to the endorsement,
+   visible before the link or CTA, and repeated in on-screen creative when the
+   format needs it.
+3. Separate safe educational wording from risky claims. Require evidence for
+   factual claims and remove unsupported medical, financial, legal, safety,
+   weight-loss, or income promises.
+4. Check testimonial honesty. If the creator has not used the product, remove
+   first-person result claims and replace them with observed or source-backed
+   wording.
+5. Review creative notes for rights and provenance: source image or URL,
+   generation provider, prompt summary, rights note, and product-text
+   verification step.
+6. Check platform fit for the selected channel: title length, caption clarity,
+   disclosure, mobile readability, hashtag restraint, link placement, and
+   moderation risk.
+7. Return a concise readiness verdict and a human-review checklist.
 
-```bash
-python3 {baseDir}/scripts/init_affiliate_campaign.py --out runs/campaign.json --title "Campaign title" --niche "home organization" --product-name "Cable organizer kit" --product-category "home office accessory" --merchant "Example Merchant" --product-url "https://example.com/product" --affiliate-url "https://example.com/product?aff=example" --affiliate-program "example-affiliate" --short-disclosure "Paid link." --platform pinterest --platform youtube
-```
+## Output
 
-2. Fill the ledger with scripts or direct JSON edits:
-   - offer: product, merchant, affiliate program, affiliate URL, commission note, product source, rights note
-   - disclosure: short disclosure, Amazon Associate statement if relevant, platform label decisions
-   - claims: claim text, evidence URL, allowed wording, risk level
-   - creative: hooks, video/carousel variants, source assets, generated assets, provenance
-   - posts: platform-native title, caption, hashtags, link, disclosure, publish status
+Return:
 
-```bash
-mkdir -p assets
-: > assets/pin-001.png
-python3 {baseDir}/scripts/add_affiliate_claim.py --campaign runs/campaign.json --claim "Designed to organize loose desk cables" --risk low --evidence-url "https://example.com/product"
-python3 {baseDir}/scripts/add_affiliate_asset.py --campaign runs/campaign.json --kind generated --asset-id pin-001 --path assets/pin-001.png --provider Higgsfield --rights-note "Generated for this campaign from operator-supplied product reference."
-python3 {baseDir}/scripts/set_affiliate_post.py --campaign runs/campaign.json --platform pinterest --title "Desk cable reset" --caption "Paid link. Simple desk setup idea." --asset-path assets/pin-001.png --status ready
-```
+- verdict: `ready`, `needs edits`, or `do not publish`,
+- disclosure fixes,
+- claim fixes,
+- caption or CTA rewrite,
+- creative rights and provenance notes,
+- platform-specific warnings,
+- final human-review checklist.
 
-Supported post and OpenClaw handoff platforms are `pinterest`, `tiktok`, `youtube`, and `instagram`. Other platforms can be tracked manually in the ledger, but these scripts cannot export OpenClaw handoffs for them.
+## Guardrails
 
-3. Validate before generation, before publishing, and after analytics updates.
-
-```bash
-python3 {baseDir}/scripts/check_affiliate_campaign.py --campaign runs/campaign.json --repo-root . --out reports/campaign-qc.json
-```
-
-4. Render a readable plan for review.
-
-```bash
-python3 {baseDir}/scripts/render_affiliate_plan.py --campaign runs/campaign.json --out reports/campaign-plan.md
-```
-
-5. Export a supervised OpenClaw handoff for the target platform.
-
-```bash
-python3 {baseDir}/scripts/export_openclaw_handoff.py --campaign runs/campaign.json --platform pinterest --out runs/pinterest-openclaw-handoff.json --browser-profile pinterest-profile
-```
-
-## Workflow
-
-### 1. Intake
-
-Ask only for missing campaign-critical inputs:
-
-- niche or product category
-- target market/region
-- product URL and affiliate program
-- whether the operator personally used the product
-- target platforms
-- landing page preference: direct affiliate link, link-in-bio, owned landing page, or email capture
-- generation stack: Claude/Higgsfield, Seedance, image model, editor, music source
-
-If the user provides a PDF, video summary, prompt pack, or competitor workflow, extract reusable principles and risks. Do not copy long prompt text into the skill, repo, or public output unless the user owns it and explicitly requests private use.
-
-### 2. Offer Gate
-
-Score products before creative work:
-
-- visual demonstration potential
-- clear problem and non-deceptive benefit
-- commission economics
-- rights to use product imagery and brand names
-- claim evidence burden
-- platform restrictions
-- audience trust risk
-- refund or complaint risk
-
-Prefer low-claim visual products for early tests: home tools, desk accessories, camera gear, bags, organizers, creator tools, kitchen workflow products, and software with clear demos.
-
-Treat these as high-risk until manually reviewed: supplements, skincare with medicinal claims, sleep/anxiety claims, weight loss, finance, legal, medicine, baby products, safety equipment, gambling, crypto, and "make money" offers.
-
-### 3. Creative Pack
-
-Create two layers:
-
-- `strategy`: hook angle, audience, promise boundary, evidence, disclosure, CTA, platform
-- `generation`: shot list, aspect ratio, duration, reference assets, product visibility, on-screen disclosure, caption/disclosure, provenance fields
-
-For Claude/Higgsfield:
-
-- Use product references only when rights are clear.
-- Ask for exact product text to be verified after generation; generated packaging text can hallucinate.
-- Use natural demos and problem-solution storytelling without pretending the generated actor is the operator.
-- Keep "AI-generated demonstration" notes in provenance when useful.
-
-For carousels:
-
-- Make slide 1 a problem or curiosity hook.
-- Make slide 2 educational context.
-- Make slide 3 the routine, demo, or comparison.
-- Make slide 4 the CTA plus disclosure.
-- Keep text readable on mobile and avoid medical certainty.
-
-### 4. Publish Handoff
-
-Before OpenClaw publishing:
-
-- run `check_affiliate_campaign.py`
-- confirm platform label requirements
-- confirm caption includes disclosure before the link or call to action
-- confirm generated asset path exists
-- confirm affiliate URL belongs to an authorized site/account
-- export the OpenClaw handoff bundle
-- capture screenshots for upload, metadata review, final confirmation, and public view
-
-If installed, use `openclaw-youtube-tiktok-publisher` for YouTube/TikTok upload after the handoff exists. If it is not installed, use the exported handoff JSON and checklist manually. For Pinterest and Instagram, use this skill's handoff checklist until a dedicated publisher skill exists.
-
-### 5. Analytics And Monetization
-
-Track every post as an experiment:
-
-- platform
-- creative ID
-- hook
-- product
-- published URL
-- affiliate URL
-- disclosure variant
-- impressions
-- saves
-- clicks
-- conversion count
-- revenue
-- cost of generation
-
-Kill a campaign if it has no saves/clicks after a fair impression threshold, if compliance review blocks the product, or if generation costs exceed expected commission.
-
-## References
-
-Read `references/compliance-gates.md` before health, finance, supplement, skincare, or high-claim offers.
-
-Read `references/platform-adapters.md` when packaging for Claude, Codex, OpenClaw, Grok, generic chat agents, GitHub, or ClawHub.
-
-Read `references/monetization.md` when turning the workflow into a paid offer, lead magnet, extension, template pack, or managed service.
-
-## Bundled Scripts
-
-- `scripts/init_affiliate_campaign.py`: create the campaign ledger skeleton.
-- `scripts/add_affiliate_claim.py`: append or replace claim evidence records.
-- `scripts/add_affiliate_asset.py`: append or replace source/generated asset provenance.
-- `scripts/set_affiliate_post.py`: create or update platform post metadata.
-- `scripts/check_affiliate_campaign.py`: validate disclosure, sensitive-category risk, claim evidence, fake testimonials, generated asset rights, and publish readiness.
-- `scripts/render_affiliate_plan.py`: render a campaign plan and QC summary in markdown.
-- `scripts/export_openclaw_handoff.py`: create a supervised browser-publishing handoff bundle for Pinterest, TikTok, YouTube, or Instagram.
-
-## Done Criteria
-
-The campaign is ready only when there is:
-
-- a campaign ledger with offer, disclosure, claims, creative, posts, and provenance
-- a QC report with no blocking errors
-- creative assets with rights/provenance notes
-- platform-specific captions and disclosures
-- an OpenClaw handoff bundle if publishing is requested
-- public URLs and screenshot evidence after publishing
+- Do not publish, schedule, upload, submit, or operate any account.
+- Do not approve paid generation, paid promotion, or purchases.
+- Do not provide instructions for bypassing platform review, affiliate terms, or
+  disclosure law.
+- Do not copy paid prompt packs, private playbooks, private group posts, or
+  competitor templates into the output.
+- Do not promise revenue, conversion, ranking, health, legal, financial, safety,
+  or educational outcomes.

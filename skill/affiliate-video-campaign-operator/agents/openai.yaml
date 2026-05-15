@@ -1,23 +1,10 @@
 name: affiliate-video-campaign-operator
-version: 0.1.6
-description: Compliant agentic affiliate-video campaign operator for Claude, Codex, OpenClaw, Grok, and generic agents.
+version: 0.1.8
+description: Review affiliate video campaign plans, disclosures, claims, creative notes, and platform captions before a human decides what to create or publish.
 entrypoint: SKILL.md
 tags:
   - affiliate
   - video
   - compliance
-  - claude
-  - higgsfield
-  - openclaw
-  - grok
-  - pinterest
-  - tiktok
-  - youtube
-  - instagram
-tools:
-  required:
-    - python3
-related_skills:
-  - agentic-video-production-publisher
-  - openclaw-youtube-tiktok-publisher
-  - chrome-extension-cws-shipper
+  - disclosure
+  - review
