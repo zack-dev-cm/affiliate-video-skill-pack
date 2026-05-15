@@ -25,6 +25,27 @@
     return usableUrl(url);
   }
 
+  function setExternalCheckout(id, url) {
+    const node = document.getElementById(id);
+    if (!node) return false;
+    if (!usableUrl(url)) {
+      node.hidden = true;
+      node.removeAttribute("href");
+      return false;
+    }
+    node.hidden = false;
+    node.setAttribute("href", url);
+    node.setAttribute("rel", "noopener");
+    return true;
+  }
+
+  function syncExternalGroups() {
+    document.querySelectorAll(".provider-links").forEach((group) => {
+      const hasVisibleLink = Array.from(group.querySelectorAll("a")).some((link) => !link.hidden);
+      group.hidden = !hasVisibleLink;
+    });
+  }
+
   function setStatus(message, tone) {
     const status = document.getElementById("checkout-status");
     if (!status) return;
@@ -95,5 +116,19 @@
     setCheckout("managed-launch-checkout", config.managed_launch_checkout_url, fallbackLinks.managed_launch_checkout_url),
   ].some(Boolean);
 
+  const externalConfigured = [
+    setExternalCheckout("setup-review-lava-checkout", config.setup_review_lava_checkout_url),
+    setExternalCheckout("setup-review-boosty-checkout", config.setup_review_boosty_checkout_url),
+    setExternalCheckout("managed-launch-lava-checkout", config.managed_launch_lava_checkout_url),
+    setExternalCheckout("managed-launch-boosty-checkout", config.managed_launch_boosty_checkout_url),
+  ].some(Boolean);
+  syncExternalGroups();
+
   attachInvoiceCheckout(configured);
+  if (externalConfigured && !configured) {
+    setStatus(
+      "NOWPayments invoice checkout is enabled, and configured Lava.top or Boosty links are available as alternative rails.",
+      "success",
+    );
+  }
 })();

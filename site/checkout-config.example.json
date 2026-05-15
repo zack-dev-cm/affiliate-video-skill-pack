@@ -1,6 +1,10 @@
 {
   "setup_review_checkout_url": "REPLACE_WITH_PROVIDER_CHECKOUT_URL",
   "managed_launch_checkout_url": "REPLACE_WITH_PROVIDER_CHECKOUT_URL",
+  "setup_review_lava_checkout_url": "REPLACE_WITH_LAVA_PRODUCT_URL",
+  "managed_launch_lava_checkout_url": "REPLACE_WITH_LAVA_PRODUCT_URL",
+  "setup_review_boosty_checkout_url": "REPLACE_WITH_BOOSTY_POST_OR_GOAL_URL",
+  "managed_launch_boosty_checkout_url": "REPLACE_WITH_BOOSTY_POST_OR_GOAL_URL",
   "provider": "optional_hosted_checkout_override",
-  "notes": "Optional override. Leave absent to use the server-side NOWPayments invoice function. Do not commit secrets."
+  "notes": "Optional overrides. Leave primary checkout URLs absent to use the server-side NOWPayments invoice function. Lava/Boosty links appear only when set. Do not commit secrets."
 }

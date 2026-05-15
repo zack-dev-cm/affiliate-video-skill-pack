@@ -215,6 +215,9 @@ The checkout page creates server-side NOWPayments hosted invoices for paid setup
 Functions. Prices are denominated in USD with `price_currency=usd`; the hosted invoice lets buyers choose supported
 crypto or fiat rails available for the NOWPayments account.
 
+`site/checkout-config.example.json` also documents optional Lava.top and Boosty checkout links. Leave those values
+unset until the provider products are live and approved.
+
 For deployment and custom-domain setup, see `docs/deployment-checklist.md`.
 
 ```bash

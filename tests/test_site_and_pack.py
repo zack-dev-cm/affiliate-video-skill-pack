@@ -52,6 +52,8 @@ class SiteAndPackTest(unittest.TestCase):
 
     def test_nowpayments_checkout_is_server_side_and_fiat_priced(self):
         checkout_js = (SITE / "checkout.js").read_text(encoding="utf-8")
+        checkout_html = (SITE / "checkout.html").read_text(encoding="utf-8")
+        checkout_config = (SITE / "checkout-config.example.json").read_text(encoding="utf-8")
         create_invoice = (ROOT / "functions" / "api" / "nowpayments" / "create-invoice.js").read_text(
             encoding="utf-8"
         )
@@ -59,6 +61,13 @@ class SiteAndPackTest(unittest.TestCase):
         offers = (ROOT / "functions" / "api" / "nowpayments" / "offers.js").read_text(encoding="utf-8")
 
         self.assertIn("/api/nowpayments/create-invoice", checkout_js)
+        self.assertIn("setExternalCheckout", checkout_js)
+        self.assertIn("setup_review_lava_checkout_url", checkout_js)
+        self.assertIn("managed_launch_boosty_checkout_url", checkout_js)
+        self.assertIn("setup-review-lava-checkout", checkout_html)
+        self.assertIn("managed-launch-boosty-checkout", checkout_html)
+        self.assertIn("setup_review_lava_checkout_url", checkout_config)
+        self.assertIn("managed_launch_boosty_checkout_url", checkout_config)
         self.assertIn("env.NOWPAYMENTS_API_KEY", create_invoice)
         self.assertIn('"x-api-key": env.NOWPAYMENTS_API_KEY', create_invoice)
         self.assertIn('price_currency: "usd"', create_invoice)

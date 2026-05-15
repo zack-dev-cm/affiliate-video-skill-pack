@@ -177,6 +177,41 @@ h3 {
   width: 100%;
 }
 
+.provider-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.provider-links span {
+  flex-basis: 100%;
+  font-weight: 760;
+}
+
+.provider-links a {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffdf8;
+  color: var(--blue);
+  font-weight: 760;
+  text-decoration: none;
+}
+
+.provider-links a[hidden] {
+  display: none;
+}
+
+.provider-links[hidden] {
+  display: none;
+}
+
 .proof-strip {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

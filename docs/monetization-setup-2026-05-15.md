@@ -28,6 +28,14 @@ Cloudflare Pages production secrets:
 
 The invoice function sends `price_currency=usd` and does not force a `pay_currency`. Fiat/card availability is controlled by NOWPayments account settings, buyer location, provider support, and account approval.
 
+Additional payment rails are tracked in `docs/payment-provider-setup-2026-05-15.md`.
+
+- NOWPayments fiat activation is visible in the dashboard through Guardarian and Banxa, but both require KYC/KYB and an activation request.
+- Lava.top product links can be exposed after email confirmation, profile setup, product publication, and moderation.
+- Boosty links can be exposed after the public creator page and paid posts or goals are created.
+
+The checkout page reads optional Lava.top and Boosty URLs from `site/checkout-config.json`. If those URLs are absent, only NOWPayments appears.
+
 ## Fulfillment
 
 Free launch pack:
