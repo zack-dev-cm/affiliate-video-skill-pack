@@ -126,3 +126,11 @@ Supported optional keys:
 ```
 
 Only `https://` links are accepted by the front-end script. Placeholder values stay hidden.
+
+## References
+
+- NOWPayments integration guide: `https://nowpayments.zendesk.com/hc/en-us/articles/21341613323421-NOWPayments-Integration-Guide`
+- NOWPayments Guardarian fiat article: `https://nowpayments.zendesk.com/hc/en-us/articles/30614003290781-Fiat-payments-with-Guardarian`
+- Lava.top creating a product: `https://en.faq.lava.top/article/61207`
+- Lava.top moderation and verification: `https://en.faq.lava.top/article/61205`
+- Boosty support and creator landing: `https://boosty.to/app/support?locale=en_US`
