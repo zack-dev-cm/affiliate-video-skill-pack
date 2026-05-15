@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Affiliate Video Campaign Operator">
+  <rect width="1200" height="630" fill="#FAF8F3"/>
+  <rect x="74" y="74" width="1052" height="482" rx="18" fill="#FFFFFF" stroke="#D8D0C3" stroke-width="3"/>
+  <rect x="116" y="124" width="232" height="50" rx="10" fill="#1F5D50"/>
+  <text x="140" y="157" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#FFFFFF">AV Operator</text>
+  <text x="116" y="258" font-family="Inter, Arial, sans-serif" font-size="66" font-weight="800" fill="#151311">AI affiliate videos</text>
+  <text x="116" y="333" font-family="Inter, Arial, sans-serif" font-size="66" font-weight="800" fill="#151311">with receipts.</text>
+  <text x="116" y="403" font-family="Inter, Arial, sans-serif" font-size="29" fill="#645E55">Disclosures, claims, assets, posts, analytics, and OpenClaw handoffs.</text>
+  <rect x="760" y="140" width="300" height="310" rx="12" fill="#FAF8F3" stroke="#D8D0C3" stroke-width="2"/>
+  <text x="790" y="193" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800" fill="#151311">Campaign QC</text>
+  <text x="950" y="193" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="#C47A2C">REVIEW</text>
+  <line x1="790" y1="226" x2="1030" y2="226" stroke="#D8D0C3" stroke-width="2"/>
+  <text x="790" y="274" font-family="Inter, Arial, sans-serif" font-size="21" fill="#645E55">Disclosure</text>
+  <text x="945" y="274" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="800" fill="#1F5D50">Present</text>
+  <text x="790" y="324" font-family="Inter, Arial, sans-serif" font-size="21" fill="#645E55">Claims</text>
+  <text x="957" y="324" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="800" fill="#1F5D50">Low risk</text>
+  <text x="790" y="374" font-family="Inter, Arial, sans-serif" font-size="21" fill="#645E55">Publish label</text>
+  <text x="946" y="374" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="800" fill="#C47A2C">Confirm</text>
+</svg>

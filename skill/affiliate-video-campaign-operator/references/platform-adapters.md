@@ -60,9 +60,9 @@ Publish the skill folder:
 clawhub publish "$PWD/skill/affiliate-video-campaign-operator" \
   --slug affiliate-video-campaign-operator \
   --name "Affiliate Video Campaign Operator" \
-  --version 0.1.1 \
+  --version 0.1.2 \
   --tags "affiliate,video,openclaw,claude,higgsfield,pinterest,tiktok,youtube,compliance" \
-  --changelog "Add campaign mutation scripts, stricter disclosure checks, and published-post receipt validation."
+  --changelog "Add static landing page, checkout placeholder, and Pro Pack monetization bundle."
 ```
 
 After publish, inspect the entry and moderation state before calling the release complete.

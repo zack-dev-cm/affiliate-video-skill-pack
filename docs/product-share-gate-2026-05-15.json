@@ -52,5 +52,11 @@
     "Sensitive niches like supplements create support burden and policy ambiguity.",
     "Without a Chrome receipt extension, updating campaign ledgers still takes discipline."
   ],
-  "next_experiment": "Publish v0.1.1, record one low-risk demo campaign, and measure whether users ask for the receipt extension."
+  "paid_offer_added": {
+    "name": "Affiliate Video Pro Pack",
+    "price_usd": 49,
+    "status": "checkout placeholder only",
+    "boundary": "Do not connect live payment until delivery, refund/support terms, and at least one public demo campaign or explicit buyer request exist."
+  },
+  "next_experiment": "Publish v0.1.2 with the static page and Pro Pack source, record one low-risk demo campaign, and measure whether users ask for checkout activation or the receipt extension."
 }

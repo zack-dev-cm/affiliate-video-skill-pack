@@ -66,6 +66,22 @@ Buy button offer:
 
 Use Stripe, Lemon Squeezy, Gumroad, or Polar depending on the current project stack. Keep the free skill usable without payment.
 
+Repo implementation:
+
+- Static page: `site/index.html`
+- Checkout placeholder: `site/checkout.html`
+- Privacy/support pages: `site/privacy.html`, `site/support.html`
+- Pro Pack source: `monetization/affiliate-video-pro-pack`
+- Pro Pack build command: `python3 scripts/build_monetization_pack.py --out dist/affiliate-video-pro-pack.zip`
+
+Do not connect a live checkout until the operator has:
+
+- refund/support terms,
+- a working delivery path for the zip,
+- a provider account URL,
+- privacy text updated for the provider,
+- at least one public demo campaign or explicit buyer request.
+
 ## Kill Gates
 
 Do not build a heavy SaaS until one of these happens:

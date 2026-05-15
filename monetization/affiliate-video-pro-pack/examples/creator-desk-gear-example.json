@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "campaign": {
+    "title": "Creator Desk Gear Example",
+    "owner": "example",
+    "niche": "creator desk gear",
+    "region": "US",
+    "target_platforms": ["pinterest", "youtube"],
+    "landing_page_url": "",
+    "thesis": "Low-claim visual desk accessories are safer first affiliate tests than supplements.",
+    "kill_criteria": {
+      "min_impressions": 1000,
+      "min_clicks": 10,
+      "max_generation_cost_usd": 25
+    }
+  },
+  "offer": {
+    "product_name": "Cable organizer kit",
+    "product_category": "home office accessory",
+    "merchant": "Example Merchant",
+    "product_url": "https://example.com/product",
+    "affiliate_url": "https://example.com/product?aff=example",
+    "affiliate_program": "example-affiliate",
+    "commission_note": "Example only",
+    "rights_note": "Use operator-owned images or approved product imagery.",
+    "personal_use": false,
+    "source_snapshots": []
+  },
+  "disclosure": {
+    "short": "Paid link.",
+    "long": "I may earn a commission if you buy through this link.",
+    "amazon_associate_statement": "",
+    "video_overlay_required": true,
+    "platform_labels": {
+      "pinterest_paid_partnership": false,
+      "tiktok_commercial_content": false,
+      "youtube_paid_promotion": true,
+      "instagram_paid_partnership": false
+    }
+  },
+  "claims": [
+    {
+      "claim": "Designed to organize loose desk cables.",
+      "risk": "low",
+      "evidence_url": "https://example.com/product",
+      "evidence_note": "",
+      "allowed_wording": "A simple way to keep loose desk cables grouped."
+    }
+  ],
+  "creative": {
+    "strategy": {
+      "audience": "Creators with messy desk setups",
+      "promise_boundary": "Organization workflow, not productivity guarantee",
+      "cta": "See the desk setup list",
+      "voice": "helpful"
+    },
+    "hooks": [
+      "The 5-minute desk cable reset",
+      "One small fix for a cleaner filming desk"
+    ],
+    "variants": [],
+    "source_assets": [],
+    "generated_assets": [],
+    "music": {
+      "source": "",
+      "rights_note": ""
+    }
+  },
+  "posts": {},
+  "analytics": {
+    "experiments": [],
+    "totals": {
+      "impressions": 0,
+      "clicks": 0,
+      "conversions": 0,
+      "revenue_usd": 0,
+      "generation_cost_usd": 0
+    }
+  },
+  "qc": {
+    "status": "example",
+    "findings": [],
+    "operator_decisions": []
+  }
+}

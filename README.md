@@ -93,6 +93,23 @@ cp -R skill/affiliate-video-campaign-operator "${CODEX_HOME:-$HOME/.codex}/skill
 python3 -m unittest discover -s tests -v
 ```
 
+## Landing Page And Monetization Pack
+
+The static landing page lives in `site/` and is ready for Cloudflare Pages or any static host.
+
+```bash
+python3 -m http.server 8787 --directory site
+```
+
+The paid template bundle lives in `monetization/affiliate-video-pro-pack`.
+
+```bash
+python3 scripts/build_monetization_pack.py \
+  --out dist/affiliate-video-pro-pack.zip
+```
+
+The checkout page is intentionally a placeholder until a Stripe, Gumroad, Lemon Squeezy, Polar, or other provider URL is connected.
+
 ## ClawHub Publish
 
 Publish the skill folder, not the repo root:
@@ -101,9 +118,9 @@ Publish the skill folder, not the repo root:
 clawhub publish "$PWD/skill/affiliate-video-campaign-operator" \
   --slug affiliate-video-campaign-operator \
   --name "Affiliate Video Campaign Operator" \
-  --version 0.1.1 \
+  --version 0.1.2 \
   --tags "affiliate,video,openclaw,claude,higgsfield,pinterest,tiktok,youtube,compliance" \
-  --changelog "Add campaign mutation scripts, stricter disclosure checks, and published-post receipt validation."
+  --changelog "Add static landing page, checkout placeholder, and Pro Pack monetization bundle."
 ```
 
 ## Safety

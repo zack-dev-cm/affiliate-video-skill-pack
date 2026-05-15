@@ -1,0 +1,48 @@
+{
+  "name": "Affiliate Video Pro Pack",
+  "version": "0.1.0",
+  "price_usd": 49,
+  "status": "checkout-placeholder",
+  "checkout_url": "REPLACE_WITH_STRIPE_GUMROAD_LEMONSQUEEZY_OR_POLAR_URL",
+  "delivery": {
+    "format": "zip",
+    "folder": "monetization/affiliate-video-pro-pack",
+    "license": "single-operator commercial use"
+  },
+  "positioning": {
+    "one_liner": "Editable templates for AI affiliate-video campaigns with claim evidence, disclosures, and publishing receipts.",
+    "not_promised": [
+      "revenue",
+      "virality",
+      "platform approval",
+      "legal compliance guarantee",
+      "affiliate program acceptance"
+    ],
+    "best_for": [
+      "Claude/Higgsfield affiliate campaign operators",
+      "Codex skill users building campaign ledgers",
+      "OpenClaw operators publishing short-form affiliate content"
+    ]
+  },
+  "included": [
+    "campaign-intake.md",
+    "offer-scorecard.md",
+    "claim-evidence-worksheet.md",
+    "platform-caption-matrix.md",
+    "openclaw-publish-checklist.md",
+    "experiment-tracker.csv",
+    "creator-desk-gear-example.json"
+  ],
+  "upsells": [
+    {
+      "name": "Setup Review",
+      "price_usd": 299,
+      "deliverable": "One sanitized campaign ledger reviewed for disclosure, claims, asset provenance, and publish handoff readiness."
+    },
+    {
+      "name": "Managed Launch",
+      "price_usd": 999,
+      "deliverable": "One low-risk affiliate campaign setup with creative planning, QC report, and OpenClaw handoff."
+    }
+  ]
+}
