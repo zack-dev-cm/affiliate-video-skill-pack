@@ -11,7 +11,7 @@ metadata: {"openclaw":{"skillKey":"affiliate-video-campaign-operator","requires"
 
 Run an AI-assisted affiliate campaign without losing disclosure, claim evidence, platform compliance, creative provenance, or publish evidence.
 
-This skill is an original workflow for Claude, Codex, and OpenClaw. It may be inspired by public affiliate-video patterns, but it must not copy paid prompt packs, private playbooks, or third-party templates into public artifacts.
+This skill is an original workflow for Claude, Codex, OpenClaw, Grok, and generic chat-agent runtimes. It may be inspired by public affiliate-video patterns, but it must not copy paid prompt packs, private playbooks, or third-party templates into public artifacts.
 
 ## Non-Negotiables
 
@@ -28,7 +28,7 @@ This skill is an original workflow for Claude, Codex, and OpenClaw. It may be in
 1. Create a campaign ledger.
 
 ```bash
-python3 {baseDir}/scripts/init_affiliate_campaign.py --out runs/campaign.json --title "Campaign title" --niche "home organization" --product-name "Cable organizer kit" --platform pinterest --platform youtube
+python3 {baseDir}/scripts/init_affiliate_campaign.py --out runs/campaign.json --title "Campaign title" --niche "home organization" --product-name "Cable organizer kit" --product-category "home office accessory" --merchant "Example Merchant" --product-url "https://example.com/product" --affiliate-url "https://example.com/product?aff=example" --affiliate-program "example-affiliate" --short-disclosure "Paid link." --platform pinterest --platform youtube
 ```
 
 2. Fill the ledger with scripts or direct JSON edits:
@@ -39,10 +39,14 @@ python3 {baseDir}/scripts/init_affiliate_campaign.py --out runs/campaign.json --
    - posts: platform-native title, caption, hashtags, link, disclosure, publish status
 
 ```bash
+mkdir -p assets
+: > assets/pin-001.png
 python3 {baseDir}/scripts/add_affiliate_claim.py --campaign runs/campaign.json --claim "Designed to organize loose desk cables" --risk low --evidence-url "https://example.com/product"
 python3 {baseDir}/scripts/add_affiliate_asset.py --campaign runs/campaign.json --kind generated --asset-id pin-001 --path assets/pin-001.png --provider Higgsfield --rights-note "Generated for this campaign from operator-supplied product reference."
 python3 {baseDir}/scripts/set_affiliate_post.py --campaign runs/campaign.json --platform pinterest --title "Desk cable reset" --caption "Paid link. Simple desk setup idea." --asset-path assets/pin-001.png --status ready
 ```
+
+Supported post and OpenClaw handoff platforms are `pinterest`, `tiktok`, `youtube`, and `instagram`. Other platforms can be tracked manually in the ledger, but these scripts cannot export OpenClaw handoffs for them.
 
 3. Validate before generation, before publishing, and after analytics updates.
 
@@ -129,7 +133,7 @@ Before OpenClaw publishing:
 - export the OpenClaw handoff bundle
 - capture screenshots for upload, metadata review, final confirmation, and public view
 
-Use `openclaw-youtube-tiktok-publisher` for YouTube/TikTok upload after the handoff exists. For Pinterest and Instagram, use this skill's handoff checklist until a dedicated publisher skill exists.
+If installed, use `openclaw-youtube-tiktok-publisher` for YouTube/TikTok upload after the handoff exists. If it is not installed, use the exported handoff JSON and checklist manually. For Pinterest and Instagram, use this skill's handoff checklist until a dedicated publisher skill exists.
 
 ### 5. Analytics And Monetization
 
@@ -155,7 +159,7 @@ Kill a campaign if it has no saves/clicks after a fair impression threshold, if 
 
 Read `references/compliance-gates.md` before health, finance, supplement, skincare, or high-claim offers.
 
-Read `references/platform-adapters.md` when packaging for Claude, Codex, OpenClaw, GitHub, or ClawHub.
+Read `references/platform-adapters.md` when packaging for Claude, Codex, OpenClaw, Grok, generic chat agents, GitHub, or ClawHub.
 
 Read `references/monetization.md` when turning the workflow into a paid offer, lead magnet, extension, template pack, or managed service.
 

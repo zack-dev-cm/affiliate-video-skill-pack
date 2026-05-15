@@ -1,6 +1,6 @@
 # Affiliate Video Skill Pack
 
-Original skill for compliant AI affiliate-video campaigns across Claude, Codex, and OpenClaw.
+Original skill for compliant AI affiliate-video campaigns across Claude, Codex, OpenClaw, Grok, and generic agent runtimes.
 
 It adapts the useful pattern from Claude + Higgsfield affiliate workflows into a safer production system:
 research the offer, prove the claims, generate videos/carousels, keep provenance, disclose commercial relationships, and hand off publishing to supervised browser automation.
@@ -15,28 +15,25 @@ research the offer, prove the claims, generate videos/carousels, keep provenance
 - Validates affiliate disclosures, Amazon Associate language, TikTok health/supplement risks, fake-testimonial language, product claims, and missing asset rights notes.
 - Produces Claude/Higgsfield creative prompts as operator guidance without copying third-party prompt packs.
 - Exports OpenClaw handoff bundles for supervised Pinterest, TikTok, YouTube Shorts, and Instagram Reels publishing.
-- Combines with `agentic-video-production-publisher` for character/music/shot ledgers and with `openclaw-youtube-tiktok-publisher` for logged-in publishing.
+- Optionally combines with `agentic-video-production-publisher` for character/music/shot ledgers and with `openclaw-youtube-tiktok-publisher` for logged-in publishing. If those skills are not installed, use this skill's generated handoff JSON and checklist manually.
 
 ## Quick Start
 
 ```bash
 python3 skill/affiliate-video-campaign-operator/scripts/init_affiliate_campaign.py \
   --out runs/campaign.json \
-  --title "Sleep Routine Magnesium Test" \
+  --title "Creator Desk Cable Reset" \
   --owner "zack-dev-cm" \
-  --niche "sleep wellness" \
-  --product-name "Magnesium glycinate supplement" \
-  --merchant "Amazon" \
-  --affiliate-program "amazon-associates" \
+  --niche "creator desk gear" \
+  --product-name "Cable organizer kit" \
+  --product-category "home office accessory" \
+  --merchant "Example Merchant" \
+  --product-url "https://example.com/product" \
+  --affiliate-url "https://example.com/product?aff=example" \
+  --affiliate-program "example-affiliate" \
+  --short-disclosure "Paid link." \
   --platform pinterest \
   --platform youtube
-```
-
-```bash
-python3 skill/affiliate-video-campaign-operator/scripts/check_affiliate_campaign.py \
-  --campaign runs/campaign.json \
-  --repo-root . \
-  --out reports/campaign-qc.json
 ```
 
 ```bash
@@ -48,12 +45,32 @@ python3 skill/affiliate-video-campaign-operator/scripts/add_affiliate_claim.py \
 ```
 
 ```bash
+mkdir -p assets
+: > assets/pin-001.png
+python3 skill/affiliate-video-campaign-operator/scripts/add_affiliate_asset.py \
+  --campaign runs/campaign.json \
+  --kind generated \
+  --asset-id pin-001 \
+  --path assets/pin-001.png \
+  --provider "example-generator" \
+  --rights-note "Generated for this campaign from operator-approved product reference."
+```
+
+```bash
 python3 skill/affiliate-video-campaign-operator/scripts/set_affiliate_post.py \
   --campaign runs/campaign.json \
   --platform pinterest \
   --title "Desk cable reset" \
   --caption "Paid link. Simple desk setup idea." \
+  --asset-path assets/pin-001.png \
   --status ready
+```
+
+```bash
+python3 skill/affiliate-video-campaign-operator/scripts/check_affiliate_campaign.py \
+  --campaign runs/campaign.json \
+  --repo-root . \
+  --out reports/campaign-qc.json
 ```
 
 ```bash
@@ -93,6 +110,87 @@ cp -R skill/affiliate-video-campaign-operator "${CODEX_HOME:-$HOME/.codex}/skill
 python3 -m unittest discover -s tests -v
 ```
 
+## Use In Agent Runtimes
+
+All runtimes use the same source folder:
+
+```text
+skill/affiliate-video-campaign-operator
+```
+
+Common operator flow:
+
+1. Create or edit `runs/campaign.json`.
+2. Run `check_affiliate_campaign.py` before generation and publishing.
+3. Render `reports/campaign-plan.md` for human review.
+4. Export an OpenClaw handoff only after disclosures, claims, rights notes, and asset paths are filled.
+
+### Claude
+
+Package the skill folder as a zip and upload it through Claude's Skills UI:
+
+```bash
+mkdir -p dist
+cd skill
+zip -r ../dist/affiliate-video-campaign-operator-claude.zip affiliate-video-campaign-operator
+```
+
+In Claude, start with:
+
+```text
+Use the Affiliate Video Campaign Operator skill. Create a campaign ledger for this product, ask only for missing campaign-critical fields, then prepare conservative creative notes and tell me which local validation command to run before generation.
+```
+
+If Claude has local file/code execution, it can run the bundled scripts. Otherwise it should produce JSON edits, review notes, and exact local commands for the operator. Use Higgsfield or other MCP video tools only after the campaign ledger has offer, disclosure, claim, and rights fields filled.
+
+### Codex
+
+Install locally:
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R skill/affiliate-video-campaign-operator "${CODEX_HOME:-$HOME/.codex}/skills/"
+```
+
+In Codex, ask:
+
+```text
+Use the affiliate-video-campaign-operator skill to create and validate a campaign ledger, then export an OpenClaw handoff for Pinterest.
+```
+
+Codex should run the bundled Python scripts instead of rewriting the workflow by hand.
+
+### OpenClaw
+
+OpenClaw should not be the strategy brain for this skill. Use it only after the QC report passes and an export exists:
+
+```bash
+python3 skill/affiliate-video-campaign-operator/scripts/export_openclaw_handoff.py \
+  --campaign runs/campaign.json \
+  --platform youtube \
+  --out runs/youtube-openclaw-handoff.json \
+  --browser-profile youtube-profile
+```
+
+Then give OpenClaw the handoff JSON and the logged-in browser profile. Pause on CAPTCHA, 2FA, policy warnings, billing, copyright disputes, or final publish confirmation unless pre-approved.
+
+Supported post and handoff platforms are `pinterest`, `tiktok`, `youtube`, and `instagram`. Other platforms can be tracked manually in `campaign.target_platforms`, but these scripts cannot export OpenClaw handoffs for them.
+
+### Grok And Other Chat Agents
+
+This repo does not assume Grok has a native skill installer. Use the skill as a plain-text operating guide:
+
+1. Attach or paste `skill/affiliate-video-campaign-operator/SKILL.md`.
+2. Attach `references/compliance-gates.md` and `references/platform-adapters.md` when platform or policy decisions matter.
+3. Ask Grok to produce JSON edits, captions, claim wording, or review notes.
+4. Run the Python scripts locally in the repo to validate and render final artifacts.
+
+Starter prompt:
+
+```text
+Use the attached Affiliate Video Campaign Operator instructions. Do not invent product claims or fake personal experience. Ask for missing campaign fields, draft conservative creative notes, and tell me which local script command to run next.
+```
+
 ## Landing Page And Monetization Pack
 
 The static landing page lives in `site/` and is ready for Cloudflare Pages or any static host.
@@ -128,9 +226,9 @@ Publish the skill folder, not the repo root:
 clawhub publish "$PWD/skill/affiliate-video-campaign-operator" \
   --slug affiliate-video-campaign-operator \
   --name "Affiliate Video Campaign Operator" \
-  --version 0.1.5 \
+  --version 0.1.6 \
   --tags "affiliate,video,openclaw,claude,higgsfield,pinterest,tiktok,youtube,compliance" \
-  --changelog "Make the launch pack free, keep NOWPayments for setup services, and add a public example page."
+  --changelog "Add clear Claude, Codex, OpenClaw, Grok, and generic-agent usage instructions."
 ```
 
 ## Safety

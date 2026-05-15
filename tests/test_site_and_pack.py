@@ -76,6 +76,179 @@ class SiteAndPackTest(unittest.TestCase):
         self.assertIn('fiat_price_currency: "usd"', offers)
         self.assertIn("publicOffers", offers)
 
+    def test_agent_runtime_usage_instructions_are_explicit(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        skill = (ROOT / "skill" / "affiliate-video-campaign-operator" / "SKILL.md").read_text(encoding="utf-8")
+        adapters = (
+            ROOT / "skill" / "affiliate-video-campaign-operator" / "references" / "platform-adapters.md"
+        ).read_text(encoding="utf-8")
+
+        for runtime in ("Claude", "Codex", "OpenClaw", "Grok"):
+            self.assertIn(runtime, readme)
+            self.assertIn(runtime, adapters)
+
+        self.assertIn("generic chat-agent", skill)
+        self.assertIn("Generic agents", adapters)
+        self.assertIn("Claude's Skills UI", readme)
+        self.assertIn("cp -R skill/affiliate-video-campaign-operator", readme)
+        self.assertIn("export_openclaw_handoff.py", readme)
+        self.assertIn("does not assume Grok has a native skill installer", readme)
+        self.assertIn("Do not assume Grok or another chat agent has a native skill installer", adapters)
+        for platform in ("pinterest", "tiktok", "youtube", "instagram"):
+            self.assertIn(platform, readme)
+            self.assertIn(platform, adapters)
+
+    def test_readme_happy_path_is_not_blocked(self):
+        scripts = ROOT / "skill" / "affiliate-video-campaign-operator" / "scripts"
+        with tempfile.TemporaryDirectory() as tmp:
+            work = Path(tmp)
+            campaign = work / "runs" / "campaign.json"
+            asset = work / "assets" / "pin-001.png"
+            asset.parent.mkdir(parents=True)
+            asset.write_bytes(b"placeholder")
+            def run_step(args: list[str]) -> None:
+                subprocess.run(args, cwd=work, check=True, text=True, capture_output=True)
+
+            run_step(
+                [
+                    sys.executable,
+                    str(scripts / "init_affiliate_campaign.py"),
+                    "--out",
+                    str(campaign),
+                    "--title",
+                    "Creator Desk Cable Reset",
+                    "--owner",
+                    "zack-dev-cm",
+                    "--niche",
+                    "creator desk gear",
+                    "--product-name",
+                    "Cable organizer kit",
+                    "--product-category",
+                    "home office accessory",
+                    "--merchant",
+                    "Example Merchant",
+                    "--product-url",
+                    "https://example.com/product",
+                    "--affiliate-url",
+                    "https://example.com/product?aff=example",
+                    "--affiliate-program",
+                    "example-affiliate",
+                    "--short-disclosure",
+                    "Paid link.",
+                    "--platform",
+                    "pinterest",
+                    "--platform",
+                    "youtube",
+                ]
+            )
+            run_step(
+                [
+                    sys.executable,
+                    str(scripts / "add_affiliate_claim.py"),
+                    "--campaign",
+                    str(campaign),
+                    "--claim",
+                    "Designed to organize loose desk cables",
+                    "--risk",
+                    "low",
+                    "--evidence-url",
+                    "https://example.com/product",
+                ]
+            )
+            run_step(
+                [
+                    sys.executable,
+                    str(scripts / "add_affiliate_asset.py"),
+                    "--campaign",
+                    str(campaign),
+                    "--kind",
+                    "generated",
+                    "--asset-id",
+                    "pin-001",
+                    "--path",
+                    "assets/pin-001.png",
+                    "--provider",
+                    "example-generator",
+                    "--rights-note",
+                    "Generated for this campaign from operator-approved product reference.",
+                ]
+            )
+            run_step(
+                [
+                    sys.executable,
+                    str(scripts / "set_affiliate_post.py"),
+                    "--campaign",
+                    str(campaign),
+                    "--platform",
+                    "pinterest",
+                    "--title",
+                    "Desk cable reset",
+                    "--caption",
+                    "Paid link. Simple desk setup idea.",
+                    "--asset-path",
+                    "assets/pin-001.png",
+                    "--status",
+                    "ready",
+                ]
+            )
+            report = work / "reports" / "campaign-qc.json"
+            run_step(
+                [
+                    sys.executable,
+                    str(scripts / "check_affiliate_campaign.py"),
+                    "--campaign",
+                    str(campaign),
+                    "--repo-root",
+                    str(work),
+                    "--out",
+                    str(report),
+                ]
+            )
+            qc = json.loads(report.read_text(encoding="utf-8"))
+            self.assertNotEqual(qc["status"], "BLOCK", qc)
+
+    def test_claude_zip_packaging_source_is_current(self):
+        source_skill = (ROOT / "skill" / "affiliate-video-campaign-operator" / "SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        source_agent = (
+            ROOT / "skill" / "affiliate-video-campaign-operator" / "agents" / "openai.yaml"
+        ).read_text(encoding="utf-8")
+        source_adapters = (
+            ROOT / "skill" / "affiliate-video-campaign-operator" / "references" / "platform-adapters.md"
+        ).read_text(encoding="utf-8")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "claude.zip"
+            subprocess.run(
+                [
+                    "zip",
+                    "-qr",
+                    str(out),
+                    "affiliate-video-campaign-operator",
+                    "-x",
+                    "*/__pycache__/*",
+                    "*.pyc",
+                ],
+                cwd=ROOT / "skill",
+                check=True,
+                text=True,
+                capture_output=True,
+            )
+            with zipfile.ZipFile(out) as archive:
+                self.assertEqual(
+                    archive.read("affiliate-video-campaign-operator/SKILL.md").decode("utf-8"),
+                    source_skill,
+                )
+                self.assertEqual(
+                    archive.read("affiliate-video-campaign-operator/agents/openai.yaml").decode("utf-8"),
+                    source_agent,
+                )
+                self.assertEqual(
+                    archive.read("affiliate-video-campaign-operator/references/platform-adapters.md").decode("utf-8"),
+                    source_adapters,
+                )
+
 
 if __name__ == "__main__":
     unittest.main()

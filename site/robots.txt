@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://affiliate-video-skill-pack.pages.dev/sitemap.xml
+Sitemap: https://affiliate-video.getgeofix.xyz/sitemap.xml
