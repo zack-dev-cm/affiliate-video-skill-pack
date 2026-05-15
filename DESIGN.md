@@ -41,6 +41,10 @@ components:
     textColor: "{colors.ink}"
     borderColor: "{colors.line}"
     rounded: "{rounded.md}"
+  runtime-card:
+    borderColor: "{colors.line}"
+    rounded: "{rounded.md}"
+    labelColor: "{colors.blue}"
 ---
 
 ## Overview
@@ -66,5 +70,6 @@ Open Design compatibility: keep the public page static, local-first, and Cloudfl
 ## Components
 
 - Receipt panels use compact rows and pass/review/block status pills.
+- Runtime cards must distinguish native skill use from plain-text guide use; do not imply Grok or generic agents have native installers.
 - Pricing cards use 8px radius and no decorative bloat.
 - CTA buttons are explicit: `Download free skill`, `Download launch pack`, `Book setup review`.

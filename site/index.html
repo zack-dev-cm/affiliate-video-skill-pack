@@ -35,9 +35,24 @@
           },
           {
             "@type": "Offer",
-            "name": "Pro Template Pack",
-            "price": "49",
-            "priceCurrency": "USD"
+            "name": "Free Launch Pack",
+            "price": "0",
+            "priceCurrency": "USD",
+            "url": "https://github.com/zack-dev-cm/affiliate-video-skill-pack/releases/latest/download/affiliate-video-pro-pack.zip"
+          },
+          {
+            "@type": "Offer",
+            "name": "Setup Review",
+            "price": "299",
+            "priceCurrency": "USD",
+            "url": "https://affiliate-video.getgeofix.xyz/checkout"
+          },
+          {
+            "@type": "Offer",
+            "name": "Managed Launch",
+            "price": "999",
+            "priceCurrency": "USD",
+            "url": "https://affiliate-video.getgeofix.xyz/checkout"
           }
         ]
       }
@@ -51,6 +66,7 @@
       </a>
       <nav aria-label="Primary navigation">
         <a href="#workflow">Workflow</a>
+        <a href="#agents">Agents</a>
         <a href="#pack">Launch Pack</a>
         <a href="#pricing">Pricing</a>
         <a href="/examples.html">Example</a>
@@ -79,11 +95,11 @@
             </div>
             <div>
               <dt>Tests</dt>
-              <dd>9 passing</dd>
+              <dd>12 passing</dd>
             </div>
             <div>
-              <dt>License</dt>
-              <dd>MIT-0</dd>
+              <dt>Launch Pack</dt>
+              <dd>$0</dd>
             </div>
           </dl>
         </div>
@@ -139,6 +155,35 @@
             <span class="icon">03</span>
             <h3>Publish handoff</h3>
             <p>Export OpenClaw-ready bundles for supervised Pinterest, TikTok, YouTube Shorts, and Instagram workflows.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="agents" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Agent runtime paths</p>
+          <h2>Native skill where supported, plain-text guide everywhere else.</h2>
+        </div>
+        <div class="runtime-grid">
+          <article>
+            <span class="runtime-label">Claude</span>
+            <h3>Upload the zip</h3>
+            <p>Use the release asset as a Claude Skill. If Claude cannot run local scripts, ask it for JSON edits and exact commands to run locally.</p>
+          </article>
+          <article>
+            <span class="runtime-label">Codex</span>
+            <h3>Install the folder</h3>
+            <p>Copy the skill into <code>$CODEX_HOME/skills</code>. Codex should run the bundled Python scripts instead of rewriting the workflow.</p>
+          </article>
+          <article>
+            <span class="runtime-label">OpenClaw</span>
+            <h3>Use the handoff</h3>
+            <p>OpenClaw starts after QC passes. Give it the exported JSON and a named logged-in browser profile, then keep final publish supervised.</p>
+          </article>
+          <article>
+            <span class="runtime-label">Grok / generic</span>
+            <h3>Attach the guide</h3>
+            <p>No native installer is assumed. Paste the skill instructions, ask for conservative edits, and validate with local scripts.</p>
           </article>
         </div>
       </section>

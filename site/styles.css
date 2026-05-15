@@ -259,15 +259,38 @@ pre {
 }
 
 .feature-grid,
-.pricing-grid {
+.pricing-grid,
+.runtime-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
+.runtime-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .feature-grid article,
+.runtime-grid article,
 .price-card {
   padding: 22px;
+}
+
+.runtime-grid article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.runtime-label {
+  display: inline-flex;
+  margin-bottom: 14px;
+  padding: 5px 8px;
+  border: 1px solid rgba(49, 92, 147, 0.24);
+  border-radius: 999px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 790;
 }
 
 .icon {
@@ -278,6 +301,7 @@ pre {
 }
 
 .feature-grid p,
+.runtime-grid p,
 .price-card p,
 .package-card p,
 .split p {
@@ -411,6 +435,7 @@ footer p {
   .hero,
   .split,
   .feature-grid,
+  .runtime-grid,
   .pricing-grid {
     grid-template-columns: 1fr;
   }
