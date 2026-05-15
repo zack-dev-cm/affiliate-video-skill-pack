@@ -132,6 +132,146 @@ class AffiliateCampaignScriptsTest(unittest.TestCase):
             self.assertTrue(payload["content"]["caption"].startswith("Paid link."))
             self.assertEqual(payload["assets"]["extra_files"], ["campaign.json"])
 
+    def test_mutation_scripts_add_claim_asset_and_post(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            asset = root / "pin.png"
+            asset.write_bytes(b"test")
+            campaign = root / "campaign.json"
+            report = root / "qc.json"
+
+            run_script(
+                "init_affiliate_campaign.py",
+                "--out",
+                str(campaign),
+                "--title",
+                "Desk Accessory Test",
+                "--product-name",
+                "Cable organizer",
+                "--affiliate-url",
+                "https://example.com/product",
+                "--short-disclosure",
+                "Paid link.",
+                "--platform",
+                "pinterest",
+            )
+            run_script(
+                "add_affiliate_claim.py",
+                "--campaign",
+                str(campaign),
+                "--claim",
+                "Designed to organize loose desk cables.",
+                "--risk",
+                "low",
+                "--evidence-url",
+                "https://example.com/product",
+            )
+            run_script(
+                "add_affiliate_asset.py",
+                "--campaign",
+                str(campaign),
+                "--kind",
+                "generated",
+                "--asset-id",
+                "pin-001",
+                "--path",
+                str(asset),
+                "--provider",
+                "Higgsfield",
+                "--rights-note",
+                "Generated from operator-owned prompt.",
+            )
+            run_script(
+                "set_affiliate_post.py",
+                "--campaign",
+                str(campaign),
+                "--platform",
+                "pinterest",
+                "--title",
+                "Desk cable reset",
+                "--caption",
+                "Paid link. Simple setup idea.",
+                "--asset-path",
+                str(asset),
+                "--status",
+                "ready",
+                "--hashtag",
+                "desksetup,organization",
+            )
+            run_script("check_affiliate_campaign.py", "--campaign", str(campaign), "--repo-root", str(root), "--out", str(report))
+
+            payload = json.loads(campaign.read_text())
+            qc = json.loads(report.read_text())
+            self.assertEqual(payload["claims"][0]["risk"], "low")
+            self.assertEqual(payload["creative"]["generated_assets"][0]["asset_id"], "pin-001")
+            self.assertEqual(payload["posts"]["pinterest"]["hashtags"], ["#desksetup", "#organization"])
+            self.assertNotEqual(qc["status"], "BLOCK")
+
+    def test_affiliate_link_alone_is_not_accepted_as_clear_disclosure(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            campaign = root / "campaign.json"
+            report = root / "qc.json"
+
+            run_script(
+                "init_affiliate_campaign.py",
+                "--out",
+                str(campaign),
+                "--title",
+                "Weak Disclosure",
+                "--product-name",
+                "Desk mat",
+                "--affiliate-url",
+                "https://example.com/product",
+                "--short-disclosure",
+                "Affiliate link.",
+            )
+            run_script("check_affiliate_campaign.py", "--campaign", str(campaign), "--repo-root", str(root), "--out", str(report))
+
+            qc = json.loads(report.read_text())
+            self.assertEqual(qc["status"], "BLOCK")
+            self.assertTrue(any("clear disclosure" in item["message"] for item in qc["errors"]))
+
+    def test_published_post_requires_url(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            asset = root / "pin.png"
+            asset.write_bytes(b"test")
+            campaign = root / "campaign.json"
+            report = root / "qc.json"
+
+            run_script(
+                "init_affiliate_campaign.py",
+                "--out",
+                str(campaign),
+                "--title",
+                "Published Receipt Gap",
+                "--product-name",
+                "Desk mat",
+                "--affiliate-url",
+                "https://example.com/product",
+                "--short-disclosure",
+                "Paid link.",
+                "--platform",
+                "pinterest",
+            )
+            run_script(
+                "set_affiliate_post.py",
+                "--campaign",
+                str(campaign),
+                "--platform",
+                "pinterest",
+                "--asset-path",
+                str(asset),
+                "--status",
+                "published",
+            )
+            run_script("check_affiliate_campaign.py", "--campaign", str(campaign), "--repo-root", str(root), "--out", str(report))
+
+            qc = json.loads(report.read_text())
+            self.assertEqual(qc["status"], "BLOCK")
+            self.assertTrue(any("published_url" in item["kind"] for item in qc["errors"]))
+
 
 if __name__ == "__main__":
     unittest.main()

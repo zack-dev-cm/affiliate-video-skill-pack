@@ -23,7 +23,7 @@ def as_list(values: Any) -> list[str]:
 
 
 def line(label: str, value: Any) -> str:
-    text = str(value or "").strip()
+    text = "" if value is None else str(value).strip()
     return f"- **{label}:** {text or 'TBD'}"
 
 

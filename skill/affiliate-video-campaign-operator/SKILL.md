@@ -31,12 +31,18 @@ This skill is an original workflow for Claude, Codex, and OpenClaw. It may be in
 python3 {baseDir}/scripts/init_affiliate_campaign.py --out runs/campaign.json --title "Campaign title" --niche "home organization" --product-name "Cable organizer kit" --platform pinterest --platform youtube
 ```
 
-2. Fill the ledger with:
+2. Fill the ledger with scripts or direct JSON edits:
    - offer: product, merchant, affiliate program, affiliate URL, commission note, product source, rights note
    - disclosure: short disclosure, Amazon Associate statement if relevant, platform label decisions
    - claims: claim text, evidence URL, allowed wording, risk level
    - creative: hooks, video/carousel variants, source assets, generated assets, provenance
    - posts: platform-native title, caption, hashtags, link, disclosure, publish status
+
+```bash
+python3 {baseDir}/scripts/add_affiliate_claim.py --campaign runs/campaign.json --claim "Designed to organize loose desk cables" --risk low --evidence-url "https://example.com/product"
+python3 {baseDir}/scripts/add_affiliate_asset.py --campaign runs/campaign.json --kind generated --asset-id pin-001 --path assets/pin-001.png --provider Higgsfield --rights-note "Generated for this campaign from operator-supplied product reference."
+python3 {baseDir}/scripts/set_affiliate_post.py --campaign runs/campaign.json --platform pinterest --title "Desk cable reset" --caption "Paid link. Simple desk setup idea." --asset-path assets/pin-001.png --status ready
+```
 
 3. Validate before generation, before publishing, and after analytics updates.
 
@@ -156,6 +162,9 @@ Read `references/monetization.md` when turning the workflow into a paid offer, l
 ## Bundled Scripts
 
 - `scripts/init_affiliate_campaign.py`: create the campaign ledger skeleton.
+- `scripts/add_affiliate_claim.py`: append or replace claim evidence records.
+- `scripts/add_affiliate_asset.py`: append or replace source/generated asset provenance.
+- `scripts/set_affiliate_post.py`: create or update platform post metadata.
 - `scripts/check_affiliate_campaign.py`: validate disclosure, sensitive-category risk, claim evidence, fake testimonials, generated asset rights, and publish readiness.
 - `scripts/render_affiliate_plan.py`: render a campaign plan and QC summary in markdown.
 - `scripts/export_openclaw_handoff.py`: create a supervised browser-publishing handoff bundle for Pinterest, TikTok, YouTube, or Instagram.

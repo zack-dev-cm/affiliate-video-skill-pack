@@ -40,6 +40,23 @@ python3 skill/affiliate-video-campaign-operator/scripts/check_affiliate_campaign
 ```
 
 ```bash
+python3 skill/affiliate-video-campaign-operator/scripts/add_affiliate_claim.py \
+  --campaign runs/campaign.json \
+  --claim "Designed to organize loose desk cables" \
+  --risk low \
+  --evidence-url "https://example.com/product"
+```
+
+```bash
+python3 skill/affiliate-video-campaign-operator/scripts/set_affiliate_post.py \
+  --campaign runs/campaign.json \
+  --platform pinterest \
+  --title "Desk cable reset" \
+  --caption "Paid link. Simple desk setup idea." \
+  --status ready
+```
+
+```bash
 python3 skill/affiliate-video-campaign-operator/scripts/render_affiliate_plan.py \
   --campaign runs/campaign.json \
   --out reports/campaign-plan.md
@@ -84,9 +101,9 @@ Publish the skill folder, not the repo root:
 clawhub publish "$PWD/skill/affiliate-video-campaign-operator" \
   --slug affiliate-video-campaign-operator \
   --name "Affiliate Video Campaign Operator" \
-  --version 0.1.0 \
+  --version 0.1.1 \
   --tags "affiliate,video,openclaw,claude,higgsfield,pinterest,tiktok,youtube,compliance" \
-  --changelog "Initial public campaign ledger, disclosure checker, and OpenClaw handoff workflow."
+  --changelog "Add campaign mutation scripts, stricter disclosure checks, and published-post receipt validation."
 ```
 
 ## Safety

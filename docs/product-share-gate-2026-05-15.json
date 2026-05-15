@@ -1,0 +1,56 @@
+{
+  "product": "affiliate-video-campaign-operator",
+  "reviewed_at": "2026-05-15",
+  "verdict": "Ship Free",
+  "reason": "The skill has a concrete first user path through AI affiliate creators who already use Claude/Higgsfield/OpenClaw workflows, but monetization should wait until real campaign receipts and usage are visible.",
+  "gate_scores": {
+    "first_traffic_source": 2,
+    "trust_reason": 2,
+    "share_moment": 1,
+    "free_mvp_plan": 2,
+    "kill_criteria": 2
+  },
+  "first_traffic_source_plan": [
+    "GitHub release and ClawHub listing under zack-dev-cm",
+    "Short demo showing a low-risk creator desk gear campaign ledger passing QC",
+    "Cross-link from agentic-video-production-publisher docs and future Chrome extension landing page"
+  ],
+  "trust_reason": [
+    "Open-source skill with deterministic validation scripts",
+    "Current FTC, Amazon, Pinterest, TikTok, Instagram, and YouTube compliance references",
+    "Avoids copied paid prompt-pack text and blocks weak disclosures"
+  ],
+  "share_trigger": {
+    "user_feels": "relief that their affiliate post has receipts before publishing",
+    "user_has": "a campaign JSON, QC report, and OpenClaw handoff they can show or reuse",
+    "user_shares_with": "another AI creator or automation operator",
+    "user_says": "This catches affiliate disclosure and claim risks before I burn a post.",
+    "user_gains": "fewer platform/account surprises and faster repeat campaign setup"
+  },
+  "free_mvp": {
+    "duration_days": 45,
+    "first_10_users": "AI video creators, affiliate experimenters, and OpenClaw/Codex users already asking for publishing workflows",
+    "giveaway": "free skill, sample low-risk campaign ledger, and Claude upload zip",
+    "onboarding_prompt": "Paste a product URL, affiliate program, target platforms, and whether you personally used the product; the skill creates and validates a campaign ledger."
+  },
+  "metrics": {
+    "day_7": {
+      "target": "3 installs or users run the sample campaign checker",
+      "shutdown_threshold": "0 installs and no demo feedback"
+    },
+    "day_30": {
+      "target": "10 installs, 3 real campaign ledgers, or 1 request for extension/setup help",
+      "shutdown_threshold": "fewer than 3 installs and no campaign examples"
+    },
+    "day_60": {
+      "target": "20 installs or 3 users asking for paid templates/setup",
+      "shutdown_threshold": "no repeat use and no request for receipt extension"
+    }
+  },
+  "top_risks": [
+    "Creators may prefer raw viral prompt packs over compliance tooling.",
+    "Sensitive niches like supplements create support burden and policy ambiguity.",
+    "Without a Chrome receipt extension, updating campaign ledgers still takes discipline."
+  ],
+  "next_experiment": "Publish v0.1.1, record one low-risk demo campaign, and measure whether users ask for the receipt extension."
+}

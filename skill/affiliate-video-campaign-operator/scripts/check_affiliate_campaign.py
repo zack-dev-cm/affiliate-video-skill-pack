@@ -12,8 +12,11 @@ from urllib.parse import urlparse
 
 
 PRIVATE_PATH_RE = re.compile(r"^(?:/Users/|/home/|[A-Za-z]:\\\\Users\\\\)")
-DISCLOSURE_RE = re.compile(r"(#ad\b|paid link|paid partnership|commission|sponsored|i may earn|i earn|affiliate)", re.IGNORECASE)
-AMAZON_ASSOCIATE_RE = re.compile(r"as an amazon associate\s+i earn from qualifying purchases", re.IGNORECASE)
+DISCLOSURE_RE = re.compile(
+    r"(#ad\b|paid link|paid partnership|commission|sponsored|i may earn|i earn|as an amazon associate|affiliate (commission|relationship))",
+    re.IGNORECASE,
+)
+AMAZON_ASSOCIATE_RE = re.compile(r"as an amazon associate,?\s+i earn from qualifying purchases", re.IGNORECASE)
 FAKE_TESTIMONIAL_RE = re.compile(
     r"\b(i tried|i used|my results|changed my life|fixed my|cured my|i finally|before i found)\b",
     re.IGNORECASE,
@@ -215,6 +218,11 @@ def main() -> int:
                 add_issue(errors, f"post.{platform}.asset_path", "Ready/scheduled/published post needs asset_path.")
             elif not exists_for_path(asset_path, repo_root):
                 add_issue(errors, f"post.{platform}.asset_path", f"asset_path does not exist locally: {asset_path}")
+        if str(post.get("status") or "").lower() == "published":
+            if not str(post.get("published_url") or "").strip():
+                add_issue(errors, f"post.{platform}.published_url", "Published post needs published_url.")
+            if not str(post.get("evidence_screenshot") or "").strip():
+                add_issue(warnings, f"post.{platform}.evidence_screenshot", "Published post should include evidence_screenshot.")
 
     platform_labels = disclosure.get("platform_labels") or {}
     if "youtube" in platforms and affiliate_url and not platform_labels.get("youtube_paid_promotion"):
