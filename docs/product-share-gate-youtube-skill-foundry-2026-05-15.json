@@ -1,0 +1,57 @@
+{
+  "product": "youtube-skill-foundry",
+  "reviewed_at": "2026-05-15",
+  "verdict": "Ship Free",
+  "reason": "The artifact is shareable and concrete: a high-value YouTube tutorial becomes a public-safe summary, workflow spec, and installable skill. The service must avoid transcript scraping and copied prompt packs.",
+  "gate_scores": {
+    "first_traffic_source": 2,
+    "trust_reason": 2,
+    "share_moment": 2,
+    "free_mvp_plan": 2,
+    "kill_criteria": 2
+  },
+  "first_traffic_source_plan": [
+    "Existing GitHub and ClawHub skill audience",
+    "Demo posts showing one video converted into a skill without copying transcript text",
+    "Cross-link from Affiliate Video Campaign Operator and Agentic Video Production Publisher"
+  ],
+  "trust_reason": [
+    "Uses official YouTube metadata APIs for discovery",
+    "Transcript use is manual, creator-owned, or licensed",
+    "Every skill includes source receipt and public-safety review",
+    "Open-source artifacts are inspectable"
+  ],
+  "share_trigger": {
+    "user_feels": "relief that a long video became an installable workflow",
+    "user_has": "a summary, workflow YAML, source receipt, and skill folder",
+    "user_shares_with": "AI operators, creator friends, or open-source maintainers",
+    "user_says": "This turns useful YouTube tutorials into reusable skills instead of another notes file.",
+    "user_gains": "status for packaging useful workflows and less repeated manual note-taking"
+  },
+  "free_mvp": {
+    "duration_days": 45,
+    "giveaway": "one manual video-to-skill conversion template and source-safety checker",
+    "first_10_users": "Codex/OpenClaw users who already watch AI workflow tutorials",
+    "onboarding_prompt": "Paste a YouTube URL, transcript or notes you are allowed to use, target agent, and desired skill name."
+  },
+  "metrics": {
+    "day_7": {
+      "target": "1 complete demo conversion and 3 user reactions",
+      "shutdown_threshold": "demo artifact is not useful enough to install"
+    },
+    "day_30": {
+      "target": "3 published skills, 5 stars/installs, or 2 setup requests",
+      "shutdown_threshold": "fewer than 5 qualified touches and no repeat use"
+    },
+    "day_60": {
+      "target": "10 installs, 5 converted videos, or 1 paid setup",
+      "shutdown_threshold": "no creator/operator demand for conversion"
+    }
+  },
+  "top_risks": [
+    "YouTube transcript rights and scraping temptation",
+    "Generated skills become shallow summaries instead of executable workflows",
+    "Too broad a watchlist creates noise and manual review burden"
+  ],
+  "smallest_next_experiment": "Convert one operator-supplied transcript into summary.md, workflow.yaml, SKILL.md, and public-safety review before building a tracker."
+}
